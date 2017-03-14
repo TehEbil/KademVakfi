@@ -10,7 +10,7 @@ var myApp = new Framework7({
     }
 });
 
-var ip = "http://52.59.238.139:3001/"
+var ip = "http://52.59.238.139:3001"
 
 var counter = 0;
 var firstVid = ""
