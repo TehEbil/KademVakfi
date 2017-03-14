@@ -1,0 +1,306 @@
+/*
+   statusbar-overlay sets the background color for the overlay. Black text is the default when the statusbar plugin is not added. When the
+   statusbar plugin is added, it also adds default setting to make the content white via:
+
+       <preference name="StatusBarStyle" value="lightcontent"/>
+
+   Setting the background color to black will allow the default light content (white text/icons) to show on it. The statusbar plugin is included
+   in the config.xml file and will be added by the CLI when you build locally.
+
+   See https://github.com/apache/cordova-plugin-statusbar
+*/
+
+
+
+.page-content{
+    background-color: aliceblue;
+    padding-top: 8vh !important;
+	padding-bottom: 0 !important;
+}
+
+.statusbar-overlay {
+    background: #000000;
+}
+
+.content-block {
+	margin: 0;
+}
+
+#idTest {
+	background-color: aliceblue;
+}
+
+.clCounter {
+    position: relative;
+    top: -1.8vh;
+	//top: 10
+    color: black;
+    font-family: century;
+    font-size: 6.5vh;
+    float: left;
+    padding-right: 7px;
+    color: #1a1f35;
+}
+
+
+.clMainVideoOuter
+{
+    background: white;
+    margin: 0;
+    //width: 100%;
+    padding-bottom: 1%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.blackText {
+    color: #1c2137;
+	font-size: 3vh;
+}
+
+
+.classA{
+    
+    //border-radius: 3px;
+    text-align: center;
+    color: #313752;
+    border-style: solid;
+    border-width: 1.5px 0px 0px 0px;
+
+}
+
+.classA p{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.classA:last-child{
+    border-style: solid;
+    border-width: 1.5px 0px 1.5px 0px;
+    
+}
+
+#idAll {
+     font-size: 2.5vh ;
+}
+
+#onChangeVideoClick{
+}
+
+.toolbox{
+    position: absolute;
+    bottom: 0.6%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    padding: 4px;
+
+    
+}
+
+.tool a{
+    text-align: center;
+        color: #dee4ff;   
+}
+
+
+
+.tool:first-child{
+    border-style: solid;
+    border-width: 1.5px 0px 1.5px 0px;
+    border-radius: 2px;
+    color: #313752;
+    padding-bottom: 4px;
+    padding-top:  4px;
+    
+}
+
+
+.tool:last-child p{
+    
+    margin: 0;
+    
+}
+
+.panel 
+{
+    width: 50%;
+    text-align: center;
+}
+
+.panel.panel-left.panel-cover {
+    z-index: 6000;
+    left: -50%
+}
+
+body.with-panel-left-cover .panel-left {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0)
+}
+
+
+body.with-panel-left-reveal .views {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0)
+}
+
+#idPanel.with-panel-left-reveal .panel-overlay {
+    margin-left: 50%;
+}
+
+/*
+.clVideos:nth-child(odd) { background-color: #ddd} */
+.clVideos:nth-child(even) { 
+    
+    background-color: aliceblue;
+    background: #bddbed;
+background: -moz-linear-gradient(top, #bddbed 0%, #f0f8ff 2%, #f0f8ff 50%, #f0f8ff 98%, #bddbed 100%);
+background: -webkit-linear-gradient(top, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
+background: linear-gradient(to bottom, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', endColorstr='#bddbed',GradientType=0 );
+    color: #161a2d;
+}
+.clVideos:nth-child(odd) {
+    background-color: #bad9eb;
+    color: #161a2d;
+    background: #f0f8ff;
+    background: -moz-linear-gradient(top, #f0f8ff 0%, #bad9eb 2%, #dcf2ff 50%, #bad9eb 98%, #f0f8ff 100%);
+    background: -webkit-linear-gradient(top, #f0f8ff 0%,#bad9eb 2%,#dcf2ff 50%,#bad9eb 98%,#f0f8ff 100%);
+    background: linear-gradient(to bottom, #f0f8ff 0%,#bad9eb 2%,#dcf2ff 50%,#bad9eb 98%,#f0f8ff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f8ff', endColorstr='#f0f8ff',GradientType=0 );
+ }
+
+
+
+.navbar{
+    height: 8vh;
+}
+
+.navbar-inner{
+    background-color: #abb8f1;
+    padding: 0;
+
+}
+
+.panel{
+    background: #1a1f35;
+    
+}
+
+
+.clLinks{
+    width: 100%;
+    //-webkit-transform:scale(0.6,0.5);
+    Color: #363e61;
+    font-weight: 800;
+    margin: 0;
+    height: 3%;
+    padding-top: 5px;
+    padding-bottom: 7px;
+    font-family: georgia;
+    font-size: 2.8vh;
+    
+}
+
+a {
+    color: #dee4ff;
+}
+
+#brrrt{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#iconimg{
+    height: 3vh;
+    width: 3vh;
+    position: absolute;
+	left: 2vh;
+}
+
+/*#brrt{
+    position: absolute;
+    max-height: 55%;
+    
+} */
+
+.centered {
+	text-align: center;
+}
+
+
+
+.clVideos {
+    min-height: 90px;
+	padding-top: 14px;
+	padding-bottom: 4vh;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.clVideos img{
+	margin: -6vh 0;
+	clip-path: inset(6vh 0px 6vh 0px);
+    border-radius: 4px; 
+    
+}
+
+
+ 
+.clMainVideo{
+    
+}
+
+table.tableizer-table {
+	margin-left:auto; 
+    margin-right:auto;
+	font-size: 10px;
+	border: 1px solid #CCC; 
+	font-family: Arial, Helvetica, sans-serif;
+} 
+.tableizer-table td {
+	padding: 4px;
+	margin: 3px;
+	border: 1px solid #CCC;
+}
+.tableizer-table th {
+	background-color: #104E8B; 
+	color: #FFF;
+	font-weight: bold;
+}
+
+#idVideoText {
+}
+
+#idVideoDate {
+}
+
+.clVideoX p{
+    
+    color: #1a1f35;;
+}
+
+.clDate{
+    text-align: left;
+    font-family: verdana, non-serif;
+    font-weight: 550;
+    margin: 0;
+    font-size: 2.2vh;
+    float: left;
+    
+}
+
+.clTitle{
+    text-align: left;
+    font-family: verdana;
+    font-weight: 550;
+    //margin-top: auto;
+	margin: 0;
+    font-size: 2.2vh;
+}
