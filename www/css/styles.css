@@ -245,8 +245,8 @@ a {
 }
 
 .clVideos img{
-	//margin: -6vh 0;
-	//clip-path: inset(6vh 0px 6vh 0px);
+	margin: -6vh 0;
+	-webkit-clip-path: inset(6vh 0px 6vh 0px);
 	//clip: rect(6vh, 0px, 6vh, 0px);
     border-radius: 4px; 
 }
