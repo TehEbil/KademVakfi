@@ -341,10 +341,35 @@ function onYouTubeIframeAPIReady() {
 	{
 		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
 	}
-	else
-		SetupPlayer();
+	else {
+	  player = new YT.Player('player', {
+	  width: '100%',
+	  playerVars: {
+		  "fs" :1,
+	      "enablejsapi":1,
+		  "origin": document.domain,
+		  "modestbranding": 0,
+		  "showinfo": 0,
+		  "rel":0,
+		  "color": "red"
+		  },
+	  videoId: firstVid,
+	  events: {
+		  'onReady': onPlayerReady,
+		  'onStateChange': onPlayerStateChange,
+		  'onError': onPlayerError
+	  }
+	});
 	
+	firstVid = "";
+	gState = 2;
+	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+	}
 	
+}
+
+function onPlayerError(event) {
+	alert(event);
 }
 
 function SetupPlayer()
