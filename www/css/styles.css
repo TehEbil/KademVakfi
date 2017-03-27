@@ -10,7 +10,9 @@
    See https://github.com/apache/cordova-plugin-statusbar
 */
 
-
+* {
+	font-size: 3vmax;
+}
 
 .page-content{
     background-color: aliceblue;
@@ -33,7 +35,6 @@
 .clCounter {
     position: relative;
     top: -1.8vmax;
-	//top: 10
     color: black;
     font-family: century;
     font-size: 6.5vmax;
@@ -47,7 +48,6 @@
 {
     background: white;
     margin: 0;
-    //width: 100%;
     padding-bottom: 1%;
     padding-left: 0;
     padding-right: 0;
@@ -62,17 +62,26 @@
 
 .classA{
     
-    //border-radius: 3px;
     text-align: center;
     color: #313752;
     border-style: solid;
     border-width: 1.5px 0px 0px 0px;
+	padding: 0.8vmax;
 
 }
 
+.tool a{
+    text-align: center;
+    color: #dee4ff;   
+	font-size: 2.65vmax;
+}
+
+.classA a {
+	font-size: 2.65vmax;
+}
+
 .classA p{
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin: 0.5vmax 0;
 }
 
 .classA:last-child{
@@ -82,7 +91,7 @@
 }
 
 #idAll {
-     font-size: 2.5vmax ;
+	font-size: 0.65vmax !important;
 }
 
 #onChangeVideoClick{
@@ -94,18 +103,11 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
     left: 0;
     right: 0;
     padding: 4px;
 
     
-}
-
-.tool a{
-    text-align: center;
-        color: #dee4ff;   
 }
 
 
@@ -152,18 +154,16 @@ body.with-panel-left-reveal .panel-overlay {
 }
 
 
-/*
-.clVideos:nth-child(odd) { background-color: #ddd} */
 .clVideos:nth-child(even) { 
-    
     background-color: aliceblue;
     background: #bddbed;
-background: -moz-linear-gradient(top, #bddbed 0%, #f0f8ff 2%, #f0f8ff 50%, #f0f8ff 98%, #bddbed 100%);
-background: -webkit-linear-gradient(top, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
-background: linear-gradient(to bottom, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', endColorstr='#bddbed',GradientType=0 );
-    color: #161a2d;
+	background: -moz-linear-gradient(top, #bddbed 0%, #f0f8ff 2%, #f0f8ff 50%, #f0f8ff 98%, #bddbed 100%);
+	background: -webkit-linear-gradient(top, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
+	background: linear-gradient(to bottom, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', endColorstr='#bddbed',GradientType=0 );
+	color: #161a2d;
 }
+
 .clVideos:nth-child(odd) {
     background-color: #bad9eb;
     color: #161a2d;
@@ -194,15 +194,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', end
 
 .clLinks{
     width: 100%;
-    //-webkit-transform:scale(0.6,0.5);
     Color: #363e61;
     font-weight: 800;
     margin: 0;
-    height: 3%;
-    padding-top: 5px;
-    padding-bottom: 7px;
+    height: 6vmax;
+	padding: 6px 0;
     font-family: georgia;
-    font-size: 2.8vmax;
+    font-size: 4vmax;
     
 }
 
@@ -223,12 +221,6 @@ a {
 	left: 2vmax;
 }
 
-/*#brrt{
-    position: absolute;
-    max-height: 55%;
-    
-} */
-
 .centered {
 	text-align: center;
 }
@@ -236,7 +228,6 @@ a {
 
 
 .clVideos {
-    //min-height: 20vmax;
 	padding-top: 14px;
 	padding-bottom: 4vmax;
     padding-left: 15px;
@@ -246,15 +237,7 @@ a {
 .clVideos img{
 	margin: -6vmax 0;
 	-webkit-clip-path: inset(6vmax 0px 6vmax 0px);
-	//clip: rect(6vmax, 0px, 6vmax, 0px);
-    //border-radius: 4px; 
 	height: 40vmax;
-}
-
-
- 
-.clMainVideo{
-    
 }
 
 table.tableizer-table {
@@ -289,7 +272,7 @@ table.tableizer-table {
 .clDate{
     text-align: left;
     font-family: verdana, non-serif;
-    font-weight: 550;
+    font-weight: 500;
     margin: 0;
     font-size: 2.2vmax;
     float: left;
@@ -299,8 +282,7 @@ table.tableizer-table {
 .clTitle{
     text-align: left;
     font-family: verdana;
-    font-weight: 550;
-    //margin-top: auto;
+    font-weight: 500;
 	margin: 0;
     font-size: 2.2vmax;
 }

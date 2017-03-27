@@ -56,7 +56,7 @@ $$('body').click(function() {
 
 myApp.onPageInit('about', function (page) {
 	myApp.closePanel();
-
+	
 	$$('#idVer').html("App Version: " + versionx);
 	
 	$$('.form-to-data').on('click', function(){
@@ -154,6 +154,10 @@ function SetupJSAPI()
 	
 	cordova.getAppVersion.getVersionNumber().then(function (version) {
 		versionx = version;
+		
+		
+	$$('#idVer').html("App Version: " + versionx);
+	console.log(versionx);
 
 		$$.ajax({
 			type: 'GET',
@@ -376,8 +380,8 @@ function SetupPlayer()
 	
 	firstVid = "";
 	gState = 2;
-	console.log($$('#player').attr("style", "height: 35vmax"));
-	console.log(player);
+	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+	
 }
 
 function onPlayerReady(event) {
