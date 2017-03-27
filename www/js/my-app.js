@@ -380,9 +380,10 @@ function SetupPlayer()
 	
 }
 
-function onPlayerReady(event) {
-	
+function onPlayerReady() {
+  alert("Ready")
   playerIsSetup = true;
+  alert(playerIsSetup);
 }
 
 function onPlayerStateChange(event) {

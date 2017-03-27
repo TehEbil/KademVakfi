@@ -10,6 +10,7 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
+    <icon height="180" platform="ios" src="icon-60@3x.png" width="180" />
     <icon src="icon.png" />
     <content src="index.html" />
     <access origin="*" />
