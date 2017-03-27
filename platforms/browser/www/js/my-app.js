@@ -1,7 +1,6 @@
 var myApp = new Framework7({
     pushState: true,
     swipePanel: 'left',
-	
 	onAjaxStart: function (xhr) {
         myApp.showIndicator();
     },
@@ -10,10 +9,10 @@ var myApp = new Framework7({
     }
 });
 
-var ip = "http://52.59.238.139:3001"
+var ip = "http://52.59.238.139:3001";
 
 var counter = 0;
-var firstVid = ""
+var firstVid = "";
 var player = null;
 var data_o;
 var isFullScreenState = false;
@@ -27,7 +26,7 @@ var messages = {
 	"noInternet": 	 "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
 	"thanks": 		 "Teşekkür Ederiz"
-}
+};
 
 var categories = {
 	"sahsiyet": "Şahsiyet",
@@ -35,7 +34,7 @@ var categories = {
 	"dünya": "Dünya Fikir",
 	"düsünce": "Düşünce ve İfade",
 	"yaratilis": "Yaratılış ve Kişilik"
-}
+};
 
 var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {
@@ -61,33 +60,33 @@ myApp.onPageInit('about', function (page) {
 	$$('#idVer').html("App Version: " + versionx);
 	
 	$$('.form-to-data').on('click', function(){
-	  name = $$("#formName").val();
-	  problem = $$("#formText").val();
-	  //$$.get( ip + "/api/postProblem?name=" + name + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
+	  var xname = $$("#formName").val();
+	  var problem = $$("#formText").val();
+	  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
 	  
 	$$.ajax({
 		type: 'GET',
-		url: ip + "/api/postProblem?name=" + name + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
+		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
 		success: function (data) {
-			alert(messages["thanks"])
+			alert(messages.thanks);
 		}});
 
 	  mainView.router.back();
 	}); 
-})
+});
 
 function initialize()
 {	
 	//console.log(device.version); 
 	if(!localStorage.getItem('firstTime'))
 	{
-		localStorage.setItem('firstTime', true)
+		localStorage.setItem('firstTime', true);
 		//alert(messages["problem"]);
 	}
 	
 	if(!checkConnection())
 	{
-		alert(messages["noInternet"])
+		alert(messages.noInternet);
 		document.addEventListener("online", delayedIntialize, true);
 	}
 	else
@@ -108,18 +107,18 @@ function initialize()
 		"ios": {
 		  "sound": true,
 		  "vibration": true,
-		  "badge": true,
+		  "badge": true
 		},
 		"windows": {}
 	});
 
    myApp.push.on('registration', function(data) {
 	   var oldRegId = localStorage.getItem('registrationId');
-	   if (oldRegId !== data.registrationId) {
+	   if (oldRegId != data.registrationId) {
 		   localStorage.setItem('registrationId', data.registrationId);
 			$$.ajax({
 				type: 'GET',
-				url: ip + "/api/postId?id=" + data.registrationId + "&oldId=" + oldRegId + "&os=" + device.platform,
+				url: ip + "/api/postId?id=" + data.registrationId + "&oldId=" + oldRegId + "&os=" + device.platform
 			});
 	   }
 	    //$$.get( ip + "/api/postId?id=" + data.registrationId);
@@ -138,7 +137,7 @@ function initialize()
 	  }, function() {
 		  console.log('errorPUSH');
 	  });
-};
+}
 
 function SetupJSAPI()
 {
@@ -159,8 +158,9 @@ function SetupJSAPI()
 			type: 'GET',
 			url: ip + "/api/version/",
 			success: function (data) {
-				if(version < data)
-					alert(messages["newVer"]);
+				if(version < data) {
+					alert(messages.newVer);
+				}
 			}});
 	});
 	gState = 1;
@@ -204,22 +204,22 @@ function onMenuKeyDown() {
 
 function SetupFullscreen()
 { 
-    var screenChange = "webkitfullscreenchange mozfullscreenchange fullscreenchange"
+    var screenChange = "webkitfullscreenchange mozfullscreenchange fullscreenchange";
 	
 	screenChange.split(" ").forEach(function(e){
 	
 		document.addEventListener(e, function(e) {
 			if (isFullScreenState = !isFullScreenState) {
 				StatusBar.hide();
-				console.log("FullScreen")
+				console.log("FullScreen");
 			} else {
 				StatusBar.show();
-				console.log("NotFullScreen")
+				console.log("NotFullScreen");
 			}
 		});
 	});
 }
-
+/*
 function IsFullscreen2() {
 	//alert(document.body.clientHeight + " " +  screen.height + "    !!   " + document.body.clientWidth + " " + screen.width)
 	return document.body.clientHeight >= screen.height-30 && document.body.clientWidth == screen.width;
@@ -229,6 +229,7 @@ function IsFullscreen() {
 	//alert(document.fullScreen  + " " +   document.webkitIsFullScreen  + " " +   document.mozFullScreen)
 	return document.fullScreen || document.webkitIsFullScreen || document.mozFullScreen;
 }
+*/
 /*
 function Titles()
 {
@@ -271,24 +272,23 @@ $$('.tool').on('click', function(event) {
 
 function getVideos(pVideoTitle, init=false)
 {
-	markup_o = ""	
+	var markup_o = "";	
 	var size = data_o[pVideoTitle].length;
 	
 	for(var key_s in data_o[pVideoTitle])
 	{
-		dat = data_o[pVideoTitle][key_s];
-		vidId = dat['videoId'];
+		var dat = data_o[pVideoTitle][key_s];
+		var vidId = dat.videoId;
 		
 		if(firstVid == "")
 			firstVid = vidId;
 		
-		var url = dat["img"];
+		var url = dat.img;
 		
-		date = dat.date;
+		var date = dat.date;
+		var videoTitle = "UNDEFINED";
 		if(dat.title != "")
 			videoTitle = dat.title;
-		else
-			videoTitle = "UNDEFINED";
 		
 		//markup_o += '<div class="clVideos"> <a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><p>' + videoTitle + '</p><p>' + date + '</p></div>\n';
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
@@ -309,7 +309,7 @@ function ChangeVideoSite(pVideoTitle) {
 
 function getVideoData()
 {
-	markup_o = "";
+	var markup_o = "";
 	
 	$$.ajax({
 		type: 'GET',
@@ -333,13 +333,13 @@ function getVideoData()
 function onYouTubeIframeAPIReady() {
 	if(counter <= 12 && (firstVid == null || firstVid == ""))
 	{
-		setTimeout(onYouTubeIframeAPIReady, 250)
+		setTimeout(onYouTubeIframeAPIReady, 250);
 		counter++;
 		return;
 	}
 	if(counter >= 12)
 	{
-		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
+		$$("#idTest").html("<p>" + messages.serverProblem + "</p>");	
 	}
 	else {
 	  player = new YT.Player('player', {
