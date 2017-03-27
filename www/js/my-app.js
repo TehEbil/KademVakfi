@@ -26,7 +26,7 @@ var messages = {
 	"newVer":  		 "Yeni güncelleme mevcut",
 	"noInternet": 	 "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
-	"thanks": 		 "Teşekkür Ederim"
+	"thanks": 		 "Teşekkür Ederiz"
 }
 
 var categories = {
@@ -337,9 +337,11 @@ function onYouTubeIframeAPIReady() {
 		counter++;
 		return;
 	}
+	alert("Hallo: " + counter)
 	if(counter >= 12)
 	{
 		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
+		alert("FEHLER!!");
 	}
 	else
 		SetupPlayer();
@@ -357,6 +359,9 @@ function SetupPlayer()
 	  }
 	})*/
 	
+		
+		alert("inSetup1");
+	
 	  player = new YT.Player('player', {
 	  width: '100%',
 	  color: 'white',
@@ -371,6 +376,7 @@ function SetupPlayer()
 	firstVid = "";
 	gState = 2;
 	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+		alert("inSetup2");
 	
 }
 
