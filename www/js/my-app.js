@@ -70,10 +70,7 @@ myApp.onPageInit('about', function (page) {
 		url: ip + "/api/postProblem?name=" + name + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
 		success: function (data) {
 			alert(messages["thanks"])
-		},
-		error: function() {
-		  alert(messages["serverProblem"]);            
-	}});
+		}});
 
 	  mainView.router.back();
 	}); 
