@@ -22,10 +22,11 @@ var playerIsSetup = false;
 var gState = 0;
 
 var messages = {
-	"problem": "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",
-	"newVer": "Yeni güncelleme mevcut",
-	"noInternet": "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
-	"serverProblem": "Server Problem var. Please try again later."
+	/*"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",*/
+	"newVer":  		 "Yeni güncelleme mevcut",
+	"noInternet": 	 "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
+	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
+	"thanks": 		 "Teşekkür Ederim"
 }
 
 var categories = {
@@ -43,7 +44,7 @@ var mainView = myApp.addView('.view-main', {
 
 $$(document).on('deviceready', function() {
 	
-	$$.ajaxSetup({'timeout': 4000});
+	$$.ajaxSetup({'timeout': 3000});
 	initialize();
 });
 
@@ -68,10 +69,10 @@ myApp.onPageInit('about', function (page) {
 		type: 'GET',
 		url: ip + "/api/postProblem?name=" + name + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
 		success: function (data) {
-			alert("Tessekür Ederim")
+			alert(messages["thanks"])
 		},
 		error: function() {
-		  alert("Cannot Reach Server.");            
+		  alert(messages["serverProblem"]);            
 	}});
 
 	  mainView.router.back();
@@ -84,7 +85,7 @@ function initialize()
 	if(!localStorage.getItem('firstTime'))
 	{
 		localStorage.setItem('firstTime', true)
-		alert(messages["problem"]);
+		//alert(messages["problem"]);
 	}
 	
 	if(!checkConnection())
@@ -120,11 +121,9 @@ function initialize()
 	   if (oldRegId !== data.registrationId) {
 		   localStorage.setItem('registrationId', data.registrationId);
 			$$.ajax({
-			type: 'GET',
-			url: ip + "/api/postId?id=" + data.registrationId + "&oldId=" + oldRegId + "&os=" + device.platform,
-			error: function() {
-			  alert("Cannot Reach Server1.");            
-			}});
+				type: 'GET',
+				url: ip + "/api/postId?id=" + data.registrationId + "&oldId=" + oldRegId + "&os=" + device.platform,
+			});
 	   }
 	    //$$.get( ip + "/api/postId?id=" + data.registrationId);
    });
@@ -165,10 +164,7 @@ function SetupJSAPI()
 			success: function (data) {
 				if(version < data)
 					alert(messages["newVer"]);
-			},
-			error: function() {
-			  alert("Cannot Reach Server.");            
-		}});
+			}});
 	});
 	gState = 1;
 }
@@ -332,22 +328,19 @@ function getVideoData()
 
 			$$("#idSidebar").html(markup_o);
 			getVideos("sahsiyet", true);
-		},
-		error: function() {
-		  alert("Cannot Reach Server.");            
-	}});
+		}});
 
 	return;
 }
 
 function onYouTubeIframeAPIReady() {
-	if(counter <= 40 && (firstVid == null || firstVid == ""))
+	if(counter <= 12 && (firstVid == null || firstVid == ""))
 	{
 		setTimeout(onYouTubeIframeAPIReady, 250)
 		counter++;
 		return;
 	}
-	if(counter >= 40)
+	if(counter >= 12)
 	{
 		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
 	}
@@ -399,7 +392,7 @@ function ChangeVideo(vidId, pause=false)
 {
 	if(!playerIsSetup)
 	{
-		alert("FEHLER");
+		alert("ERROR");
 		return;
 	}
 	$$('.page-content').scrollTop(0, 600);
