@@ -7312,6 +7312,7 @@
             function handleClicks(e) {
                 /*jshint validthis:true */
                 var clicked = $(this);
+				console.log(clicked);
                 var url = clicked.attr('href');
                 var isLink = clicked[0].nodeName.toLowerCase() === 'a';
         

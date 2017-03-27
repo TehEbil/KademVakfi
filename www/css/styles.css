@@ -14,7 +14,7 @@
 
 .page-content{
     background-color: aliceblue;
-    padding-top: 8vh !important;
+    padding-top: 8vmax !important;
 	padding-bottom: 0 !important;
 }
 
@@ -32,11 +32,11 @@
 
 .clCounter {
     position: relative;
-    top: -1.8vh;
+    top: -1.8vmax;
 	//top: 10
     color: black;
     font-family: century;
-    font-size: 6.5vh;
+    font-size: 6.5vmax;
     float: left;
     padding-right: 7px;
     color: #1a1f35;
@@ -56,7 +56,7 @@
 
 .blackText {
     color: #1c2137;
-	font-size: 3vh;
+	font-size: 3vmax;
 }
 
 
@@ -82,7 +82,7 @@
 }
 
 #idAll {
-     font-size: 2.5vh ;
+     font-size: 2.5vmax ;
 }
 
 #onChangeVideoClick{
@@ -130,12 +130,11 @@
 .panel 
 {
     width: 50%;
-    text-align: center;
+	text-align: center;
 }
 
 .panel.panel-left.panel-cover {
-    z-index: 6000;
-    left: -50%
+  left: -50%;
 }
 
 body.with-panel-left-cover .panel-left {
@@ -143,15 +142,15 @@ body.with-panel-left-cover .panel-left {
     transform: translate3d(50%, 0, 0)
 }
 
-
 body.with-panel-left-reveal .views {
     -webkit-transform: translate3d(50%, 0, 0);
     transform: translate3d(50%, 0, 0)
 }
 
-#idPanel.with-panel-left-reveal .panel-overlay {
-    margin-left: 50%;
+body.with-panel-left-reveal .panel-overlay {
+  margin-left: 50%;
 }
+
 
 /*
 .clVideos:nth-child(odd) { background-color: #ddd} */
@@ -178,7 +177,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', end
 
 
 .navbar{
-    height: 8vh;
+    height: 8vmax;
 }
 
 .navbar-inner{
@@ -203,7 +202,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', end
     padding-top: 5px;
     padding-bottom: 7px;
     font-family: georgia;
-    font-size: 2.8vh;
+    font-size: 2.8vmax;
     
 }
 
@@ -218,10 +217,10 @@ a {
 }
 
 #iconimg{
-    height: 3vh;
-    width: 3vh;
+    height: 3vmax;
+    width: 3vmax;
     position: absolute;
-	left: 2vh;
+	left: 2vmax;
 }
 
 /*#brrt{
@@ -237,18 +236,19 @@ a {
 
 
 .clVideos {
-    min-height: 90px;
+    //min-height: 20vmax;
 	padding-top: 14px;
-	padding-bottom: 4vh;
+	padding-bottom: 4vmax;
     padding-left: 15px;
     padding-right: 15px;
 }
 
 .clVideos img{
-	margin: -6vh 0;
-	-webkit-clip-path: inset(6vh 0px 6vh 0px);
-	//clip: rect(6vh, 0px, 6vh, 0px);
-    border-radius: 4px; 
+	margin: -6vmax 0;
+	-webkit-clip-path: inset(6vmax 0px 6vmax 0px);
+	//clip: rect(6vmax, 0px, 6vmax, 0px);
+    //border-radius: 4px; 
+	height: 40vmax;
 }
 
 
@@ -291,7 +291,7 @@ table.tableizer-table {
     font-family: verdana, non-serif;
     font-weight: 550;
     margin: 0;
-    font-size: 2.2vh;
+    font-size: 2.2vmax;
     float: left;
     
 }
@@ -302,5 +302,5 @@ table.tableizer-table {
     font-weight: 550;
     //margin-top: auto;
 	margin: 0;
-    font-size: 2.2vh;
+    font-size: 2.2vmax;
 }

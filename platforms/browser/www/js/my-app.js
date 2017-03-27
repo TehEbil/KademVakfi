@@ -19,11 +19,13 @@ var data_o;
 var isFullScreenState = false;
 var versionx = "1.0.0";
 var playerIsSetup = false;
+var gState = 0;
 
 var messages = {
 	"problem": "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",
 	"newVer": "Yeni güncelleme mevcut",
-	"noInternet": "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun."
+	"noInternet": "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
+	"serverProblem": "Server Problem var. Please try again later."
 }
 
 var categories = {
@@ -45,10 +47,12 @@ $$(document).on('deviceready', function() {
 	initialize();
 });
 
+/*
 $$('body').click(function() {
 	if ($$('body').hasClass('with-panel-left-cover') || $$('body').hasClass('with-panel-left-reveal')) 
 		myApp.closePanel();
 });
+*/
 
 myApp.onPageInit('about', function (page) {
 	myApp.closePanel();
@@ -162,6 +166,7 @@ function SetupJSAPI()
 			  alert("Cannot Reach Server.");            
 		}});
 	});
+	gState = 1;
 }
 
 function delayedIntialize()
@@ -178,7 +183,18 @@ function onPause() {
 		player.pauseVideo();
 }
 
-function onResume() {
+function onResume()
+{
+	if(gState == 0)
+	{
+		SetupJSAPI();
+		getVideoData();
+	}
+	else if (gState == 1)
+	{	
+		getVideoData();
+		SetupPlayer();
+	}
 }
 
 function onMenuKeyDown() {
@@ -229,6 +245,32 @@ function Titles()
 		}
 	}
 }*/
+
+
+$$('.toola').click(function(event) {
+	// this.append wouldn't work
+	console.log(event);
+	console.log(this.childNodes[1].click());
+	console.log($$(this).children());
+	//$$(this).children('a')[0].click();
+});
+
+$$('.tool').on('click', function(event) {
+	var found = $$(this).find('a');
+	/*console.log(event);
+	console.log(this);*/
+	//console.log(($$(this).children()).click());
+	//console.log(($$(this).children()).click());
+	//console.log($$('.tool a').click());
+	
+	/*
+	console.log($$(this).find('a').click())
+	console.log($$(this).find('a').click())
+	*/
+
+	found.click();
+	found.click();
+});
 
 function getVideos(pVideoTitle, init=false)
 {
@@ -301,9 +343,27 @@ function onYouTubeIframeAPIReady() {
 		counter++;
 		return;
 	}
+	if(counter >= 40)
+	{
+		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
+	}
+	else
+		SetupPlayer();
+	
+	
+}
+
+function SetupPlayer()
+{
+	/*
+	player = new YT.Player('player', {
+	  events: {
+		'onReady': onPlayerReady,
+		'onStateChange': onPlayerStateChange
+	  }
+	})*/
 	
 	  player = new YT.Player('player', {
-	  height: '250',
 	  width: '100%',
 	  color: 'white',
 	  playerVars: { fs:1 },
@@ -313,10 +373,15 @@ function onYouTubeIframeAPIReady() {
 		'onStateChange': onPlayerStateChange
 	  }
 	});
-	firstVid = ""; 
+	
+	firstVid = "";
+	gState = 2;
+	console.log($$('#player').attr("style", "height: 35vmax"));
+	console.log(player);
 }
 
 function onPlayerReady(event) {
+	
   playerIsSetup = true;
 }
 
