@@ -374,41 +374,36 @@ function onPlayerError(event) {
 
 function SetupPlayer()
 {
-	/*
-	player = new YT.Player('player', {
-	  events: {
-		'onReady': onPlayerReady,
-		'onStateChange': onPlayerStateChange
-	  }
-	})*/
-	
-		
-	
-	  player = new YT.Player('player', {
-	  width: '100%',
-	  playerVars: {
-		  "fs" :1,
-	      "enablejsapi":1,
+	player = new YT.Player('player', 
+	{
+		width: '100%',
+		playerVars: {
+		  "fs" : 1,
+		  "enablejsapi": 1,
 		  "origin": document.domain,
-		  "modestbranding": 1,
+		  "modestbranding": 0,
 		  "showinfo": 0,
-		  "rel":0,
+		  "rel": 0,
 		  "color": "red"
-		  },
-	  videoId: firstVid,
-	  events: {
-		'onReady': onPlayerReady,
-		'onStateChange': onPlayerStateChange
-	  }
+		},
+		videoId: firstVid,
+		events: {
+		  'onReady': onPlayerReady,
+		  'onStateChange': onPlayerStateChange,
+		  'onError': onPlayerError
+		}
 	});
 	
+	YT.onReady(null);
+	onPlayerReady(null);
 	firstVid = "";
 	gState = 2;
-	//$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
 	
 }
 
 function onPlayerReady(event) {
+	console.log(event);
   //alert("Ready")
   playerIsSetup = true;
   //alert(playerIsSetup);
