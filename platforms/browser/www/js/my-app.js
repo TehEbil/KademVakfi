@@ -337,11 +337,9 @@ function onYouTubeIframeAPIReady() {
 		counter++;
 		return;
 	}
-	alert("Hallo: " + counter)
 	if(counter >= 12)
 	{
 		$$("#idTest").html("<p>" + messages['serverProblem']+ "</p>");	
-		alert("FEHLER!!");
 	}
 	else
 		SetupPlayer();
@@ -360,12 +358,18 @@ function SetupPlayer()
 	})*/
 	
 		
-		alert("inSetup1");
 	
 	  player = new YT.Player('player', {
 	  width: '100%',
-	  color: 'white',
-	  playerVars: { fs:1 },
+	  playerVars: {
+		  "fs" :1,
+	      "enablejsapi":1,
+		  "origin": document.domain,
+		  "modestbranding": 1,
+		  "showinfo": 0,
+		  "rel":0,
+		  "color": "red"
+		  },
 	  videoId: firstVid,
 	  events: {
 		'onReady': onPlayerReady,
@@ -375,18 +379,19 @@ function SetupPlayer()
 	
 	firstVid = "";
 	gState = 2;
-	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
-		alert("inSetup2");
+	//$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
 	
 }
 
-function onPlayerReady() {
-  alert("Ready")
+function onPlayerReady(event) {
+  //alert("Ready")
   playerIsSetup = true;
-  alert(playerIsSetup);
+  //alert(playerIsSetup);
 }
 
-function onPlayerStateChange(event) {
+function onPlayerStateChange(event)
+{
+	console.log(event.data);
 	if (event.data == YT.PlayerState.BUFFERING) {
 		//event.target.setPlaybackQuality('hd720');
 	}
