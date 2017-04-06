@@ -23,7 +23,7 @@ var gState = 0;
 var messages = {
 	/*"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",*/
 	"newVer":  		 "Yeni güncelleme mevcut",
-	"noInternet": 	 "Internet baglantiniz yok. Devam etmek icin lütfen internet baglantinizin oldugundan emin olun.",
+	"noInternet": 	 "Internet bağlantınız yok. Devam etmek icin lütfen internet bağlantınızın oldugundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
 	"thanks": 		 "Teşekkür Ederiz"
 };

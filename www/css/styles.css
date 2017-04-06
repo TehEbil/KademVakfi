@@ -160,7 +160,7 @@ body.with-panel-left-reveal .panel-overlay {
 	background: -moz-linear-gradient(top, #bddbed 0%, #f0f8ff 2%, #f0f8ff 50%, #f0f8ff 98%, #bddbed 100%);
 	background: -webkit-linear-gradient(top, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
 	background: linear-gradient(to bottom, #bddbed 0%,#f0f8ff 2%,#f0f8ff 50%,#f0f8ff 98%,#bddbed 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', endColorstr='#bddbed',GradientType=0 );
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bddbed', endColorstr='#bddbed',GradientType=0 );*/
 	color: #161a2d;
 }
 
@@ -171,7 +171,7 @@ body.with-panel-left-reveal .panel-overlay {
     background: -moz-linear-gradient(top, #f0f8ff 0%, #bad9eb 2%, #dcf2ff 50%, #bad9eb 98%, #f0f8ff 100%);
     background: -webkit-linear-gradient(top, #f0f8ff 0%,#bad9eb 2%,#dcf2ff 50%,#bad9eb 98%,#f0f8ff 100%);
     background: linear-gradient(to bottom, #f0f8ff 0%,#bad9eb 2%,#dcf2ff 50%,#bad9eb 98%,#f0f8ff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f8ff', endColorstr='#f0f8ff',GradientType=0 );
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f8ff', endColorstr='#f0f8ff',GradientType=0 );*/
  }
 
 
@@ -265,8 +265,7 @@ table.tableizer-table {
 }
 
 .clVideoX p{
-    
-    color: #1a1f35;;
+    color: #1a1f35;
 }
 
 .clDate{
