@@ -215,10 +215,14 @@ a {
 }
 
 #iconimg{
+	margin: auto;
     height: 3vmax;
     width: 3vmax;
     position: absolute;
 	left: 2vmax;
+	top: 0;
+	bottom: 0;
+	right: 0;
 }
 
 .centered {

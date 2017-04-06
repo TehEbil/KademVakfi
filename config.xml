@@ -2,10 +2,10 @@
 <widget id="com.cycrosoft.kademvakfi" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>KademVakfi</name>
     <description>
-        A basic Framework7 template for PhoneGap.
+        KademVakfi
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="can.friedhoff@gmail.com" href="http://google.de">
+        Cycrosoft
     </author>
 	<icon src="icon-60@3x.png" platform="ios" width="180" height="180" />
 	<icon src="icon.png" />
@@ -55,6 +55,16 @@
       <splash qualifier="mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
       <splash qualifier="hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
       <splash qualifier="xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+   </platform>
+   
+   <platform name="wp8">
+      <icon src="res/icons/wp8/ApplicationIcon.png" width="99" height="99" />
+      <icon src="res/icons/wp8/Background.png" width="159" height="159" />
+   </platform>
+   <platform name="windows">
+      <icon src="res/icons/windows8/logo.png" width="150" height="150" />
+      <icon src="res/icons/windows8/smalllogo.png" width="30" height="30" />
+      <icon src="res/icons/windows8/storelogo.png" width="50" height="50" />
    </platform>
 	
     <preference name="DisallowOverscroll" value="true" />
