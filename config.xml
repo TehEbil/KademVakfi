@@ -10,13 +10,11 @@
 	<icon src="icon-60@3x.png" platform="ios" width="180" height="180" />
 	<icon src="icon.png" />
     <content src="index.html" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
+	
+    <access origin="*" subdomains="true" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+	
     <platform name="android">
         <preference name="android-minSdkVersion" value="16" />
         <allow-intent href="market:*" />
