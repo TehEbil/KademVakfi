@@ -1,6 +1,7 @@
 var myApp = new Framework7({
     pushState: true,
     swipePanel: 'left',
+	fastClicks: false,
 	onAjaxStart: function (xhr) {
         myApp.showIndicator();
     },
@@ -20,10 +21,15 @@ var versionx = "1.0.0";
 var playerIsSetup = false;
 var gState = 0;
 
+/*
+a	b	c	ç	d	e	f	g	ğ	h	ı	i	j	k	l	m	n	o	ö	p	r	s	ş	t	u	ü	v	y	z
+A	B	C	Ç	D	E	F	G	Ğ	H	I	İ	J	K	L	M	N	O	Ö	P	R	S	Ş	T	U	Ü	V	Y	Z
+*/
+
 var messages = {
 	/*"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",*/
 	"newVer":  		 "Yeni güncelleme mevcut",
-	"noInternet": 	 "Internet bağlantınız yok. Devam etmek icin lütfen internet bağlantınızın oldugundan emin olun.",
+	"noInternet": 	 "İnternet bağlantınız yok. Devam etmek için lütfen İnternet bağlantınızın olduğundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
 	"thanks": 		 "Teşekkür Ederiz"
 };
@@ -292,7 +298,6 @@ function getVideos(pVideoTitle, init=false)
 		if(dat.title != "")
 			videoTitle = dat.title;
 		
-		//markup_o += '<div class="clVideos"> <a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><p>' + videoTitle + '</p><p>' + date + '</p></div>\n';
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
 	}
 	
@@ -449,26 +454,15 @@ function ChangeVideo(vidId, pause=false)
 	alert(1);
 	if(!playerIsSetup)
 	{
-		alert(2);
-		alert(playerIsSetup);
-		alert(player)
+		alert("FEHLER ChangeVideo, playerIsSetup is false")
 		console.log(player);
-		//return;
-		
-		alert(3);
 	}
 	$$('.page-content').scrollTop(0, 600);
-	
-	alert(4);
 	player.loadVideoById(vidId);
 	
-	alert(5);
 	if(pause)
-	{ player.stopVideo(); 
-	alert(6);
-	}
+		player.stopVideo(); 
 	
-	alert(7);
 	return false;
 }
 
