@@ -192,7 +192,7 @@ function onResume()
 	else if (gState == 1)
 	{	
 		getVideoData();
-		SetupPlayer();
+		SetupPlayer();			// ?
 	}
 }
 
@@ -355,13 +355,35 @@ function onPlayerError(event) {
 
 function SetupPlayer()
 {
+	if(player!=null)
+		return;
+	
+	if(firstVid == "" || firstVid == null)
+	{
+		alert("NULL");
+		firstVid = "4xkG4pPbIjg";
+	}
+	
+	player = new YT.Player('player', {
+		height: '250',
+		width: '100%',
+		color: 'white',
+		playerVars: { fs:1 },
+		videoId: firstVid,
+		events: {
+		'onReady': onPlayerReady,
+		'onStateChange': onPlayerStateChange
+		}
+	});
+	
+	
+	/*
 	var playerParams =
 	{
 		playerVars:
 		{
 			"fs" : 1,		  
 			"enablejsapi": 1,
-			"origin": "http://52.59.238.139",
 			"modestbranding": 0,
 			"showinfo": 0,
 			"rel": 0,
@@ -377,7 +399,7 @@ function SetupPlayer()
 		videoId: firstVid
 	};
 	player = new YT.Player("player",playerParams);
-	
+	*/
 	/*
 	player = new YT.Player('player', 
 	{
@@ -400,8 +422,8 @@ function SetupPlayer()
 	});*/
 	
 	
-	if(device.platform == "iOS")
-		onPlayerReady(null);
+	//if(device.platform == "iOS")
+	//	onPlayerReady(null);
 	firstVid = "";
 	gState = 2;
 	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
