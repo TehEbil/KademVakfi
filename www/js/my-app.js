@@ -58,22 +58,24 @@ myApp.onPageInit('about', function (page) {
 	myApp.closePanel();
 	
 	$$('#idVer').html("App Version: " + versionx);
-	
-	$$('.form-to-data').on('click', function(){
-	  var xname = $$("#formName").val();
-	  var problem = $$("#formText").val();
-	  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
-	  
-	$$.ajax({
-		type: 'GET',
-		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
-		success: function (data) {
-			alert(messages.thanks);
-		}});
-
-	  mainView.router.back();
-	}); 
 });
+
+
+// HTML About: Report Problem
+$$('.form-to-data').on('click', function(){
+  var xname = $$("#formName").val();
+  var problem = $$("#formText").val();
+  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
+  
+$$.ajax({
+	type: 'GET',
+	url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
+	success: function (data) {
+		alert(messages.thanks);
+	}});
+
+  mainView.router.back();
+}); 
 
 function initialize()
 {	
@@ -140,7 +142,7 @@ function initialize()
 }
 
 function SetupJSAPI()
-{
+{	
 	var tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -341,32 +343,8 @@ function onYouTubeIframeAPIReady() {
 	{
 		$$("#idTest").html("<p>" + messages.serverProblem + "</p>");	
 	}
-	else {
-	  player = new YT.Player('player', {
-	  width: '100%',
-	  playerVars: {
-		  "fs" :1,
-	      "enablejsapi":1,
-		  "origin": document.domain,
-		  "modestbranding": 0,
-		  "showinfo": 0,
-		  "rel":0,
-		  "color": "red"
-		  },
-	  videoId: firstVid,
-	  events: {
-		  'onReady': onPlayerReady,
-		  'onStateChange': onPlayerStateChange,
-		  'onError': onPlayerError
-	  }
-	});
-	if(device.platform == "iOS")
-		onPlayerReady(null);
-	
-	firstVid = "";
-	gState = 2;
-	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
-	}
+	else
+		SetupPlayer();
 	
 }
 
@@ -377,11 +355,35 @@ function onPlayerError(event) {
 
 function SetupPlayer()
 {
+	var playerParams =
+	{
+		playerVars:
+		{
+			"fs" : 1,		  
+			"enablejsapi": 1,
+			"origin": "http://52.59.238.139",
+			"modestbranding": 0,
+			"showinfo": 0,
+			"rel": 0,
+			"color": "red"
+		},
+		events:
+		{
+			"onReady":onPlayerReady,
+			"onError":onPlayerError,
+			"onStateChange":onPlayerStateChange
+		},
+		width: '100%',
+		videoId: firstVid
+	};
+	player = new YT.Player("player",playerParams);
+	
+	/*
 	player = new YT.Player('player', 
 	{
 		width: '100%',
 		playerVars: {
-		  "fs" : 1,
+		  "fs" : 1,		  
 		  "enablejsapi": 1,
 		  "origin": document.domain,
 		  "modestbranding": 0,
@@ -395,13 +397,11 @@ function SetupPlayer()
 		  'onStateChange': onPlayerStateChange,
 		  'onError': onPlayerError
 		}
-	});
+	});*/
 	
 	
 	if(device.platform == "iOS")
 		onPlayerReady(null);
-	/*YT.onReady(null);
-	onPlayerReady(null);*/
 	firstVid = "";
 	gState = 2;
 	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
@@ -424,18 +424,29 @@ function onPlayerStateChange(event)
 
 function ChangeVideo(vidId, pause=false)
 {
+	alert(1);
 	if(!playerIsSetup)
 	{
+		alert(2);
 		alert(playerIsSetup);
 		alert(player)
 		console.log(player);
 		//return;
+		
+		alert(3);
 	}
 	$$('.page-content').scrollTop(0, 600);
-	player.loadVideoById(vidId);
-	if(pause)
-		player.stopVideo();
 	
+	alert(4);
+	player.loadVideoById(vidId);
+	
+	alert(5);
+	if(pause)
+	{ player.stopVideo(); 
+	alert(6);
+	}
+	
+	alert(7);
 	return false;
 }
 
