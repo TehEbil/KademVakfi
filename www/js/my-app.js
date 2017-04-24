@@ -360,6 +360,8 @@ function onYouTubeIframeAPIReady() {
 		  'onError': onPlayerError
 	  }
 	});
+	if(device.platform == "iOS")
+		onPlayerReady(null);
 	
 	firstVid = "";
 	gState = 2;
@@ -370,7 +372,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerError(event) {
 	alert(event);
-	alert("FEHLER");
+	alert("FEHLER: onPlayerError");
 }
 
 function SetupPlayer()
@@ -395,6 +397,9 @@ function SetupPlayer()
 		}
 	});
 	
+	
+	if(device.platform == "iOS")
+		onPlayerReady(null);
 	/*YT.onReady(null);
 	onPlayerReady(null);*/
 	firstVid = "";
@@ -424,7 +429,7 @@ function ChangeVideo(vidId, pause=false)
 		alert(playerIsSetup);
 		alert(player)
 		console.log(player);
-		return;
+		//return;
 	}
 	$$('.page-content').scrollTop(0, 600);
 	player.loadVideoById(vidId);
