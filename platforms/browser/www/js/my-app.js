@@ -411,7 +411,6 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event)
 {
-	console.log(event.data);
 	if (event.data == YT.PlayerState.BUFFERING) {
 		//event.target.setPlaybackQuality('hd720');
 	}

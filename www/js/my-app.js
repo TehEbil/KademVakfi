@@ -370,6 +370,7 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerError(event) {
 	alert(event);
+	alert("FEHLER");
 }
 
 function SetupPlayer()
@@ -394,8 +395,8 @@ function SetupPlayer()
 		}
 	});
 	
-	YT.onReady(null);
-	onPlayerReady(null);
+	/*YT.onReady(null);
+	onPlayerReady(null);*/
 	firstVid = "";
 	gState = 2;
 	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
@@ -411,7 +412,6 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event)
 {
-	console.log(event.data);
 	if (event.data == YT.PlayerState.BUFFERING) {
 		//event.target.setPlaybackQuality('hd720');
 	}
@@ -421,7 +421,9 @@ function ChangeVideo(vidId, pause=false)
 {
 	if(!playerIsSetup)
 	{
-		alert("ERROR");
+		alert(playerIsSetup);
+		alert(player)
+		console.log(player);
 		return;
 	}
 	$$('.page-content').scrollTop(0, 600);
