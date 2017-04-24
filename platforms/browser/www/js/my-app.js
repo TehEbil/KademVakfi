@@ -1,6 +1,7 @@
 var myApp = new Framework7({
     pushState: true,
     swipePanel: 'left',
+	//fastClicks: false,
 	onAjaxStart: function (xhr) {
         myApp.showIndicator();
     },
@@ -20,10 +21,16 @@ var versionx = "1.0.0";
 var playerIsSetup = false;
 var gState = 0;
 
+/*
+a	b	c	ç	d	e	f	g	ğ	h	ı	i	j	k	l	m	n	o	ö	p	r	s	ş	t	u	ü	v	y	z
+A	B	C	Ç	D	E	F	G	Ğ	H	I	İ	J	K	L	M	N	O	Ö	P	R	S	Ş	T	U	Ü	V	Y	Z
+*/
+
 var messages = {
-	/*"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",*/
+	//"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",
+	"problem": 		 "Uygulama takılırsa, lütfen uygulamayı yeniden başlatın ve hata bildirimi yapınız.",
 	"newVer":  		 "Yeni güncelleme mevcut",
-	"noInternet": 	 "Internet bağlantınız yok. Devam etmek icin lütfen internet bağlantınızın oldugundan emin olun.",
+	"noInternet": 	 "İnternet bağlantınız yok. Devam etmek için lütfen İnternet bağlantınızın olduğundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
 	"thanks": 		 "Teşekkür Ederiz"
 };
@@ -58,22 +65,25 @@ myApp.onPageInit('about', function (page) {
 	myApp.closePanel();
 	
 	$$('#idVer').html("App Version: " + versionx);
-	
+	// HTML About: Report Problem
 	$$('.form-to-data').on('click', function(){
 	  var xname = $$("#formName").val();
 	  var problem = $$("#formText").val();
 	  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
 	  
-	$$.ajax({
+	  $$.ajax({
 		type: 'GET',
 		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
 		success: function (data) {
 			alert(messages.thanks);
-		}});
+	  }});
 
-	  mainView.router.back();
-	}); 
+	mainView.router.back();
+	});
 });
+
+
+ 
 
 function initialize()
 {	
@@ -81,7 +91,7 @@ function initialize()
 	if(!localStorage.getItem('firstTime'))
 	{
 		localStorage.setItem('firstTime', true);
-		//alert(messages["problem"]);
+		alert(messages["problem"]);
 	}
 	
 	if(!checkConnection())
@@ -140,7 +150,7 @@ function initialize()
 }
 
 function SetupJSAPI()
-{
+{	
 	var tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -190,7 +200,7 @@ function onResume()
 	else if (gState == 1)
 	{	
 		getVideoData();
-		SetupPlayer();
+		SetupPlayer();			// ?
 	}
 }
 
@@ -290,7 +300,6 @@ function getVideos(pVideoTitle, init=false)
 		if(dat.title != "")
 			videoTitle = dat.title;
 		
-		//markup_o += '<div class="clVideos"> <a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><p>' + videoTitle + '</p><p>' + date + '</p></div>\n';
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
 	}
 	
@@ -341,44 +350,69 @@ function onYouTubeIframeAPIReady() {
 	{
 		$$("#idTest").html("<p>" + messages.serverProblem + "</p>");	
 	}
-	else {
-	  player = new YT.Player('player', {
-	  width: '100%',
-	  playerVars: {
-		  "fs" :1,
-	      "enablejsapi":1,
-		  "origin": document.domain,
-		  "modestbranding": 0,
-		  "showinfo": 0,
-		  "rel":0,
-		  "color": "red"
-		  },
-	  videoId: firstVid,
-	  events: {
-		  'onReady': onPlayerReady,
-		  'onStateChange': onPlayerStateChange,
-		  'onError': onPlayerError
-	  }
-	});
-	
-	firstVid = "";
-	gState = 2;
-	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
-	}
+	else
+		SetupPlayer();
 	
 }
 
 function onPlayerError(event) {
 	alert(event);
+	alert("FEHLER: onPlayerError");
 }
 
 function SetupPlayer()
 {
+	if(player!=null)
+		return;
+	
+	if(firstVid == "" || firstVid == null)
+	{
+		alert("NULL");
+		firstVid = "4xkG4pPbIjg";
+	}
+	
+	player = new YT.Player('player', {
+		height: '250',
+		width: '100%',
+		color: 'white',
+		playerVars: { fs:1 },
+		videoId: firstVid,
+		events: {
+		'onReady': onPlayerReady,
+		'onStateChange': onPlayerStateChange
+		}
+	});
+	
+	
+	/*
+	var playerParams =
+	{
+		playerVars:
+		{
+			"fs" : 1,		  
+			"enablejsapi": 1,
+			"modestbranding": 0,
+			"showinfo": 0,
+			"rel": 0,
+			"color": "red"
+		},
+		events:
+		{
+			"onReady":onPlayerReady,
+			"onError":onPlayerError,
+			"onStateChange":onPlayerStateChange
+		},
+		width: '100%',
+		videoId: firstVid
+	};
+	player = new YT.Player("player",playerParams);
+	*/
+	/*
 	player = new YT.Player('player', 
 	{
 		width: '100%',
 		playerVars: {
-		  "fs" : 1,
+		  "fs" : 1,		  
 		  "enablejsapi": 1,
 		  "origin": document.domain,
 		  "modestbranding": 0,
@@ -392,10 +426,11 @@ function SetupPlayer()
 		  'onStateChange': onPlayerStateChange,
 		  'onError': onPlayerError
 		}
-	});
+	});*/
 	
-	YT.onReady(null);
-	onPlayerReady(null);
+	
+	//if(device.platform == "iOS")
+	//	onPlayerReady(null);
 	firstVid = "";
 	gState = 2;
 	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
@@ -418,15 +453,17 @@ function onPlayerStateChange(event)
 
 function ChangeVideo(vidId, pause=false)
 {
+	//alert(1);			// DOUBLE AUFRUF
 	if(!playerIsSetup)
 	{
-		alert("ERROR");
-		return;
+		alert("FEHLER ChangeVideo, playerIsSetup is false")
+		console.log(player);
 	}
 	$$('.page-content').scrollTop(0, 600);
 	player.loadVideoById(vidId);
+	
 	if(pause)
-		player.stopVideo();
+		player.stopVideo(); 
 	
 	return false;
 }

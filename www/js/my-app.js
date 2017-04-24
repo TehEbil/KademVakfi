@@ -1,7 +1,7 @@
 var myApp = new Framework7({
     pushState: true,
     swipePanel: 'left',
-	fastClicks: false,
+	//fastClicks: false,
 	onAjaxStart: function (xhr) {
         myApp.showIndicator();
     },
@@ -27,7 +27,8 @@ A	B	C	Ç	D	E	F	G	Ğ	H	I	İ	J	K	L	M	N	O	Ö	P	R	S	Ş	T	U	Ü	V	Y	Z
 */
 
 var messages = {
-	/*"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",*/
+	//"problem": 		 "Youtube-Playersinin hatali olmasi nedeniyle. Playernin siyah ekran olma ihtimali var",
+	"problem": 		 "Uygulama takılırsa, lütfen uygulamayı yeniden başlatın ve hata bildirimi yapınız.",
 	"newVer":  		 "Yeni güncelleme mevcut",
 	"noInternet": 	 "İnternet bağlantınız yok. Devam etmek için lütfen İnternet bağlantınızın olduğundan emin olun.",
 	"serverProblem": "Sunucuda sorun var. Lütfen sonra birdaha deneyin.",
@@ -64,24 +65,25 @@ myApp.onPageInit('about', function (page) {
 	myApp.closePanel();
 	
 	$$('#idVer').html("App Version: " + versionx);
+	// HTML About: Report Problem
+	$$('.form-to-data').on('click', function(){
+	  var xname = $$("#formName").val();
+	  var problem = $$("#formText").val();
+	  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
+	  
+	  $$.ajax({
+		type: 'GET',
+		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
+		success: function (data) {
+			alert(messages.thanks);
+	  }});
+
+	mainView.router.back();
+	});
 });
 
 
-// HTML About: Report Problem
-$$('.form-to-data').on('click', function(){
-  var xname = $$("#formName").val();
-  var problem = $$("#formText").val();
-  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
-  
-$$.ajax({
-	type: 'GET',
-	url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
-	success: function (data) {
-		alert(messages.thanks);
-	}});
-
-  mainView.router.back();
-}); 
+ 
 
 function initialize()
 {	
@@ -89,7 +91,7 @@ function initialize()
 	if(!localStorage.getItem('firstTime'))
 	{
 		localStorage.setItem('firstTime', true);
-		//alert(messages["problem"]);
+		alert(messages["problem"]);
 	}
 	
 	if(!checkConnection())
@@ -451,7 +453,7 @@ function onPlayerStateChange(event)
 
 function ChangeVideo(vidId, pause=false)
 {
-	alert(1);
+	//alert(1);			// DOUBLE AUFRUF
 	if(!playerIsSetup)
 	{
 		alert("FEHLER ChangeVideo, playerIsSetup is false")
