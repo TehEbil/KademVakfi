@@ -42,6 +42,8 @@
 		<allow-intent href="itms-apps:*" />
 		<preference name="BackupWebStorage" value="none" />
    </platform>
+   
+  
    <platform name="android">
 		<preference name="android-minSdkVersion" value="16" />
 		<allow-intent href="market:*" />
@@ -67,6 +69,7 @@
       <icon src="res/icons/windows8/storelogo.png" width="50" height="50" />
    </platform>
 	
+	<preference name="xwalkMultipleApk" value="false"/>
     <preference name="DisallowOverscroll" value="true" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.1" />
