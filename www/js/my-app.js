@@ -302,7 +302,6 @@ function getVideos(pVideoTitle, init=false)
 		
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
 	}
-	
 	if(!init)
 	{
 		ChangeVideo(firstVid, true);
@@ -340,7 +339,7 @@ function getVideoData()
 }
 
 function onYouTubeIframeAPIReady() {
-	if(counter <= 12 && (firstVid == null || firstVid == ""))
+/*	if(counter <= 12 && (firstVid == null || firstVid == ""))
 	{
 		setTimeout(onYouTubeIframeAPIReady, 250);
 		counter++;
@@ -351,6 +350,7 @@ function onYouTubeIframeAPIReady() {
 		$$("#idTest").html("<p>" + messages.serverProblem + "</p>");	
 	}
 	else
+		*/
 		SetupPlayer();
 	
 }
@@ -365,34 +365,34 @@ function SetupPlayer()
 	if(player!=null)
 		return;
 	
-	if(firstVid == "" || firstVid == null)
+	/*if(firstVid == "" || firstVid == null)
 	{
 		alert("NULL");
 		firstVid = "4xkG4pPbIjg";
-	}
+	}*/
 	
-	player = new YT.Player('player', {
+	/*player = new YT.Player('player', {
 		height: '250',
 		width: '100%',
 		color: 'white',
-		playerVars: { fs:1 },
-		videoId: firstVid,
+		//videoId: firstVid,
+		playerVars: { fs:1, "showinfo": 0, "rel": 0 },
 		events: {
 		'onReady': onPlayerReady,
 		'onStateChange': onPlayerStateChange
 		}
-	});
+	});*/
 	
 	
-	/*
+	
 	var playerParams =
 	{
 		playerVars:
 		{
+			"modestbranding": 1,
 			"fs" : 1,		  
 			"enablejsapi": 1,
-			"modestbranding": 0,
-			"showinfo": 0,
+			"showinfo": 1,
 			"rel": 0,
 			"color": "red"
 		},
@@ -402,11 +402,11 @@ function SetupPlayer()
 			"onError":onPlayerError,
 			"onStateChange":onPlayerStateChange
 		},
-		width: '100%',
-		videoId: firstVid
+		//videoId: firstVid,
+		width: '100%'
 	};
 	player = new YT.Player("player",playerParams);
-	*/
+	
 	/*
 	player = new YT.Player('player', 
 	{
@@ -431,9 +431,10 @@ function SetupPlayer()
 	
 	//if(device.platform == "iOS")
 	//	onPlayerReady(null);
-	firstVid = "";
+	//firstVid = "";
 	gState = 2;
-	$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+	//$$('#player').attr("style", "height: 40vmax; margin: -10% 0 -3% 0; -webkit-clip-path: inset(10% 0px 3% 0px);");
+	$$('#player').attr("style", "height: 35vmax; width: 100%");
 	
 }
 
@@ -441,6 +442,8 @@ function onPlayerReady(event) {
 	console.log(event);
   //alert("Ready")
   playerIsSetup = true;
+  ChangeVideo(firstVid, true);
+  firstVid = "";
   //alert(playerIsSetup);
 }
 
@@ -453,7 +456,10 @@ function onPlayerStateChange(event)
 
 function ChangeVideo(vidId, pause=false)
 {
-	//alert(1);			// DOUBLE AUFRUF
+	
+	if(isFullScreenState)
+		return;
+	
 	if(!playerIsSetup)
 	{
 		alert("FEHLER ChangeVideo, playerIsSetup is false")

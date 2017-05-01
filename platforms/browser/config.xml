@@ -16,5 +16,6 @@
     <access origin="*" subdomains="true" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
+    <preference name="xwalkMultipleApk" value="false" />
     <preference name="DisallowOverscroll" value="true" />
 </widget>
