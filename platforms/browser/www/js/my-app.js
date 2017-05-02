@@ -20,6 +20,8 @@ var isFullScreenState = false;
 var versionx = "1.0.0";
 var playerIsSetup = false;
 var gState = 0;
+var oldElement = null;
+var oldTextElement = null;
 
 /*
 a	b	c	ç	d	e	f	g	ğ	h	ı	i	j	k	l	m	n	o	ö	p	r	s	ş	t	u	ü	v	y	z
@@ -312,6 +314,29 @@ function getVideos(pVideoTitle, init=false)
 }
 
 function ChangeVideoSite(pVideoTitle) {
+	//console.log($$(event.target).attr('style','#test1'));
+	if(oldElement != null)
+		oldElement.removeClass("classASelected");
+	if(oldTextElement != null)
+		oldTextElement.removeClass("classATextSelected");
+	oldElement = $$(event.target);
+	
+	console.log(oldElement);
+	console.log(oldElement);
+	
+	if(oldElement.prop("tagName") == "A")
+		oldElement = oldElement.parent();
+	if(oldElement.prop("tagName") == "P")
+		oldElement = oldElement.parent();
+	oldElement.addClass("classASelected");
+	var text = $$(oldElement).children()[0];
+	oldTextElement = $$(text).children()[0];
+	oldTextElement = $$(oldTextElement);
+	oldTextElement.addClass("classATextSelected");
+	
+	//console.log($$(event.target).addClass("test1"));
+	
+	
 	getVideos(pVideoTitle);
 }
 
@@ -327,12 +352,18 @@ function getVideoData()
 		success: function (data) {
 			data_o = data;
 			for(var key_s in data)
-				markup_o += '<div class="close-panel classA" onclick="ChangeVideoSite(\''+ key_s + '\')"><p><a id="onUrlClick" class="close-panel" onclick="ChangeVideoSite(\''+ key_s + '\');">' + categories[key_s] + '</a></p></div>';
+				if(key_s == "sahsiyet")
+					markup_o += '<div id="sahsiyetId" class="close-panel classA classASelected" onclick="ChangeVideoSite(\''+ key_s + '\')"><p><a id="onUrlClickSahsiyet" class="close-panel classATextSelected">' + categories[key_s] + '</a></p></div>';
+				else
+					markup_o += '<div class="close-panel classA" onclick="ChangeVideoSite(\''+ key_s + '\')"><p><a id="onUrlClick" class="close-panel">' + categories[key_s] + '</a></p></div>';
 				//markup_o += '<div class="classA"><p><a id="onUrlClick" class="close-panel" onclick="ChangeVideoSite(\''+ key_s + '\');">' + categories[key_s] + '</a></p></div>';
 				//markup_o += '<p><a id="onUrlClick" class="close-panel" onclick="ChangeVideoSite(\''+ key_s + '\');">' + categories[key_s] + '</a></p>';
 
 			$$("#idSidebar").html(markup_o);
+			oldElement = $$('#sahsiyetId');
+			oldTextElement = $$('#onUrlClickSahsiyet');
 			getVideos("sahsiyet", true);
+			//ChangeVideoSite("sahsiyet", true);
 		}});
 
 	return;

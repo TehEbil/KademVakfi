@@ -1,0 +1,296 @@
+/*
+   statusbar-overlay sets the background color for the overlay. Black text is the default when the statusbar plugin is not added. When the
+   statusbar plugin is added, it also adds default setting to make the content white via:
+
+       <preference name="StatusBarStyle" value="lightcontent"/>
+
+   Setting the background color to black will allow the default light content (white text/icons) to show on it. The statusbar plugin is included
+   in the config.xml file and will be added by the CLI when you build locally.
+
+   See https://github.com/apache/cordova-plugin-statusbar
+*/
+
+* {
+	font-size: 3vmax;
+}
+
+.page-content{
+    background-color: aliceblue;
+    padding-top: 8vmax !important;
+	padding-bottom: 0 !important;
+}
+
+.statusbar-overlay {
+    background: #000000;
+}
+
+.content-block {
+	margin: 0;
+}
+
+#idTest {
+	background-color: aliceblue;
+}
+
+
+
+
+.blackText {
+    color: #1c2137;
+	font-size: 3vmax;
+}
+
+
+
+
+.classA{
+    
+    text-align: center;
+    color: #007aff !important;
+    border-style: solid;
+    border-width: 1.5px 1.5px 1.5px 1.5px;
+	border-radius: 10px;
+	background-color: white;
+	
+	padding: 0.5vmax;
+}
+
+.classASelected {
+    /*color: white !important;*/
+	background-color: #007aff;
+}
+
+.tool a{
+    text-align: center;
+	font-size: 2.65vmax;
+    color: #007aff; /*#dee4ff;   */
+}
+
+.classATextSelected {
+    color: white !important; /*#dee4ff;   */
+}
+
+.classA a {
+	font-size: 2.65vmax;
+    color: #007aff; /*#dee4ff;   */
+}
+
+.classA p{
+    margin: 0.5vmax 0;
+}
+
+#idAll {
+	font-size: 0.65vmax !important;
+}
+
+#onChangeVideoClick{
+}
+
+.toolbox{
+    position: absolute;
+    bottom: 0.6%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    left: 0;
+    right: 0;
+    padding: 4px;
+
+    
+}
+
+
+
+.tool:first-child{
+    border-style: solid;
+    border-width: 1.5px 0px 1.5px 0px;
+    border-radius: 2px;
+    color: #313752;
+    padding-bottom: 4px;
+    padding-top:  4px;
+    
+}
+
+
+.tool:last-child p{
+    
+    margin: 0;
+    
+}
+
+.panel 
+{
+    width: 50%;
+	text-align: center;
+}
+
+.panel.panel-left.panel-cover {
+  left: -50%;
+}
+
+body.with-panel-left-cover .panel-left {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0)
+}
+
+body.with-panel-left-reveal .views {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0)
+}
+
+body.with-panel-left-reveal .panel-overlay {
+  margin-left: 50%;
+}
+
+
+.clVideos:nth-child(even) { 
+
+	background-color: #efeff4;
+	color: #5ac8fa !important;
+}
+
+.clVideos:nth-child(odd) {
+	background-color: white;
+	color: white!important;
+  }
+
+
+
+.navbar{
+    height: 8vmax;
+}
+
+.navbar-inner{
+    background-color: #abb8f1;
+    padding: 0;
+
+}
+
+.panel{
+    background: #ffffff;
+    
+}
+
+
+.clLinks{
+    width: 100%;
+    Color: #363e61;
+    font-weight: 800;
+    margin: 0;
+    height: 6vmax;
+	padding: 6px 0;
+    font-family: georgia;
+    font-size: 4vmax;
+    
+}
+
+a {
+    color: #dee4ff;
+}
+
+#brrrt{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+#iconimg{
+	
+	margin: auto;
+    height: 3.5vmax;
+    width: 3.5vmax;
+    position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: -3vmax;
+}
+
+.centered {
+	text-align: center;
+}
+
+
+
+.clVideos {
+	padding-top: 14px;
+	padding-bottom: 4vmax;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.clVideos img{
+	margin: -6vmax 0;
+	-webkit-clip-path: inset(6vmax 0px 6vmax 0px);
+	height: 40vmax;
+}
+
+table.tableizer-table {
+	margin-left:auto; 
+    margin-right:auto;
+	font-size: 10px;
+	border: 1px solid #CCC; 
+	font-family: Arial, Helvetica, sans-serif;
+} 
+.tableizer-table td {
+	padding: 4px;
+	margin: 3px;
+	border: 1px solid #CCC;
+}
+.tableizer-table th {
+	background-color: #104E8B; 
+	color: #FFF;
+	font-weight: bold;
+}
+
+#idVideoText {
+}
+
+#idVideoDate {
+}
+
+.clVideoX p{
+    color: #1a1f35;
+}
+
+.clCounter {
+    position: relative;
+    top: -1.8vmax;
+    color: black;
+    font-family: century;
+    font-size: 6.5vmax;
+    float: left;
+    padding-right: 7px;
+    /*color: #1a1f35;*/
+	color: #007aff;
+	color: #5ac8fa !important;
+}
+
+
+.clMainVideoOuter
+{
+    background: white;
+    margin: 0;
+    padding-bottom: 1%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.clDate{
+    text-align: left;
+    font-family: verdana, non-serif;
+    font-weight: 500;
+    margin: 0;
+    font-size: 2.2vmax;
+    float: left;
+    
+}
+
+.clTitle{
+    text-align: left;
+    font-family: verdana;
+    font-weight: 500;
+	margin: 0;
+    font-size: 2.2vmax;
+}
