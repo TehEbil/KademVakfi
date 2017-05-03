@@ -150,7 +150,7 @@ function sibtestfunc(ticketId)
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])
@@ -167,7 +167,8 @@ function sibtestfunc(ticketId)
 //Load new content as new page
 	mainView.router.loadContent(newPageContent);
 	myMessages = myApp.messages('.messages', {
-	  autoLayout:true
+	  autoLayout:true,
+	  scrollMessages: true
 	});
 	      // Init Messagebar
       var myMessagebar = myApp.messagebar('.messagebar');
@@ -205,7 +206,9 @@ function sibtestfunc(ticketId)
           day: !conversationStarted ? 'Today' : false,
           time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
         })
-        
+		console.log(gTicketData[ticketId])
+        gTicketData[ticketId]['messages'].push({isClient: true, msg: messageText})
+		console.log(gTicketData[ticketId])
 		  $$.ajax({
 			type: 'GET',
 			url: ip + "/api/postAnswer?id=" + device.uuid + "&answer=" + messageText + "&ticketId=" + ticketId,
@@ -275,17 +278,6 @@ function initialize()
 		//alert(data.title + ": " + data.message);
 		if(data.title == "Chat")
 		{
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
-			console.log("WOREKOSKD");
 			myMessages.addMessage({
 			// Message text
 				text: data.message,
