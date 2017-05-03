@@ -63,48 +63,6 @@ var mainView = myApp.addView('.view-main', {
 
 //try to implement js fix for input/text area and mobile screen keyboard
     //use class or element name
-$$(document).on("focus","input,textarea", function(e){
-	alert("n1");
-	var el = $$(e.target);
-	console.log(el);
-	//var page = el.closest(".page-content");
-	var page = el.closest(".page");
-	
-	console.log(page);
-	var elTop = el.offset().top;
-	//do correction if input at near or below middle of screen
-	if(elTop > page.height() / 2 - 20){
-		var delta = page.offset().top +  elTop - $$(".statusbar-overlay").height() * (myApp.device.ios?2:1) - $$(".navbar").height(); //minus navbar height?&quest;?
-		var kbdfix = page.find("#keyboard-fix");
-		if(kbdfix.length == 0) { //create kbdfix element
-			page.append("<div id='keyboard-fix'></div>");
-		}
-
-		kbdfix.css("height", delta*2 + "px");
-		page.scrollTop( delta, 300); 
-
-	}
-}, true);
-
-$$(document).on("blur","input,textarea", function(e){
-//call this code in the Back button handler - when it fired for keyboard hidding.
-	 //reduce all fixes
-	$$("#keyboard-fix").css("height", "0px");
-}, true);
-
-
-$$(document).on('deviceready', function() {
-	
-	$$.ajaxSetup({'timeout': 3000});
-	initialize();
-});
-
-/*
-$$('body').click(function() {
-	if ($$('body').hasClass('with-panel-left-cover') || $$('body').hasClass('with-panel-left-reveal')) 
-		myApp.closePanel();
-});
-*/
 
 myApp.onPageInit('about', function (page) {
 	
@@ -180,6 +138,19 @@ myApp.onPageInit('about', function (page) {
 	});
 });
 
+$$(document).on('deviceready', function() {
+	
+	$$.ajaxSetup({'timeout': 3000});
+	initialize();
+});
+
+/*
+$$('body').click(function() {
+	if ($$('body').hasClass('with-panel-left-cover') || $$('body').hasClass('with-panel-left-reveal')) 
+		myApp.closePanel();
+});
+*/
+
 
        // eventNameForFocus = "touchstart focus";
 /*
@@ -252,7 +223,7 @@ function sibtestfunc(ticketId)
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div></div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar" style="">  <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div></div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])

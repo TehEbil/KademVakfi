@@ -70,6 +70,15 @@
 
 }
 
+.classASelected {		
+    /*color: white !important;*/		
+	background-color: #313752;		
+}
+
+.classATextSelected {		
+    color: #f0f8ff !important; /*#dee4ff;   */		
+}
+
 .tool a{
     text-align: center;
     color: #dee4ff;   
