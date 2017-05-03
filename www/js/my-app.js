@@ -116,7 +116,7 @@ myApp.onPageInit('about', function (page) {
 		id = $$(data.target).attr('id');
 		console.log(data.target);
 		console.log(data.target);
-		sibtestfunc(gTicketData[id], ticketId);
+		sibtestfunc(id);
 		
 	});
 	
@@ -142,14 +142,16 @@ myApp.onPageInit('about', function (page) {
 	});
 });
 
-function sibtestfunc(data, ticketId)
+function sibtestfunc(ticketId)
 {
+	var data = gTicketData[ticketId]
 	console.log(data);
 	/*var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar-inner"><textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a>'
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div data-page="home" class="page navbar-fixed toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+  //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])
 		if(data['messages'][key_s]['isClient'])
@@ -169,11 +171,11 @@ function sibtestfunc(data, ticketId)
 	});
 	      // Init Messagebar
       var myMessagebar = myApp.messagebar('.messagebar');
-      
+      var messageText = "";
       // Handle message
       $$('.messagebar .link').on('click', function () {
         // Message text
-        var messageText = myMessagebar.value().trim();
+        messageText = myMessagebar.value().trim();
         // Exit if empy message
         if (messageText.length === 0) return;
         
@@ -187,7 +189,7 @@ function sibtestfunc(data, ticketId)
         // Avatar and name for received message
         var avatar, name;
         if(messageType === 'received') {
-          avatar = 'person.png';
+          avatar = 'https://github.com/TehEbil/KademVakfi/blob/master/www/person.png?raw=true';
           name = 'Cycrosoft';
         }
         // Add message
@@ -204,16 +206,16 @@ function sibtestfunc(data, ticketId)
           time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
         })
         
+		  $$.ajax({
+			type: 'GET',
+			url: ip + "/api/postAnswer?id=" + device.uuid + "&answer=" + messageText + "&ticketId=" + ticketId,
+			success: function (data) {
+				console.log(data);
+		  }});
         // Update conversation flag
         conversationStarted = true;
       }); 
 	  
-	  $$.ajax({
-		type: 'GET',
-		url: ip + "/api/postAnswer?id=" + device.uuid + "&answer=" + messageText,
-		success: function (data) {
-			console.log(data);
-	  }});
 }
 
 function initialize()
@@ -271,15 +273,26 @@ function initialize()
     myApp.push.on('notification', function(data) {
 		console.log('notification event');
 		//alert(data.title + ": " + data.message);
-		if(data.title == "ticket")
+		if(data.title == "Chat")
 		{
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
+			console.log("WOREKOSKD");
 			myMessages.addMessage({
 			// Message text
 				text: data.message,
 				// Random message type
 				type: 'received',
 				// Avatar and name:
-				avatar: 'person.png',
+				avatar: 'https://github.com/TehEbil/KademVakfi/blob/master/www/person.png?raw=true',
 				name: 'Cycrosoft',
 				// Day
 				day: !conversationStarted ? 'Today' : false,
