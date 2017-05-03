@@ -150,7 +150,7 @@ function sibtestfunc(ticketId)
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])
@@ -174,6 +174,13 @@ function sibtestfunc(ticketId)
       var myMessagebar = myApp.messagebar('.messagebar');
       var messageText = "";
       // Handle message
+	  
+	  
+		
+	  $$('#idMessageText').on('click', function() {
+		$$('#idMessageText').scrollTop($$('#idMessageText').offset().top, 500);
+		$$('body').scrollTop($$('#idMessageText').offset().top, 500);
+	  });
       $$('.messagebar .link').on('click', function () {
         // Message text
         messageText = myMessagebar.value().trim();
@@ -429,7 +436,7 @@ $$('.tool').on('click', function(event) {
 	*/
 
 	found.click();
-	found.click();
+	found.click();			// NEC???
 });
 
 function getVideos(pVideoTitle, init=false)
