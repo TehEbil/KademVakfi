@@ -22,6 +22,10 @@ var playerIsSetup = false;
 var gState = 0;
 var oldElement = null;
 var oldTextElement = null;
+var ticketData = "";
+var gTicketData = {};
+var conversationStarted = false;
+var myMessages;
 
 /*
 a	b	c	ç	d	e	f	g	ğ	h	ı	i	j	k	l	m	n	o	ö	p	r	s	ş	t	u	ü	v	y	z
@@ -47,7 +51,8 @@ var categories = {
 
 var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {
-    dynamicNavbar: true
+    dynamicNavbar: true,
+	domCache: true
 });
 
 $$(document).on('deviceready', function() {
@@ -64,7 +69,56 @@ $$('body').click(function() {
 */
 
 myApp.onPageInit('about', function (page) {
+	
+	$$.ajax({
+		type: 'GET',
+		url: ip + "/api/getProblem?id=" + device.uuid,
+		success: function (data) {
+			ticketData = JSON.parse(data);
+			gTicketData = ticketData;
+			
+			var markup_o = '<div class="list-block"><ul>'
+			for(var key_s in ticketData)
+			{
+				/*gTicketData[key_s] = {}
+				gTicketData[key_s]['messages'] = []
+				gTicketData[key_s]['messages'] = testData;*/
+				markup_o += ''
+				+'      <li>'
+				+'         <a class="startChat item-link">'
+				//+'         <a class="startChat ' + key_s + '" onclick="sibtestfunc(' + testData + '])" class="item-link">'
+				+'            <div class="item-content">'
+				+'               <div class="item-media"><i class="icon">' + (parseInt(key_s) + 1) + '</i></div>'
+				+'               <div id="'+key_s+'" class="item-inner">'
+				+'                  <div id="'+key_s+'" class="item-title">' + ticketData[key_s].problem + '</div>'
+				+'               </div>'
+				+'            </div>'
+				+'         </a>'
+				+'      </li>';
+				
+			}
+			markup_o += '</ul></div>'
+			$$('#idTickets').html(markup_o);
+
+
+			
+			console.log(data);
+	  }});
+	
 	myApp.closePanel();
+				
+				// Init Messages
+	myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});	
+	
+	$$(document).on('click', '.startChat', function (data) {
+		id = $$(data.target).attr('id');
+		console.log(data.target);
+		console.log(data.target);
+		sibtestfunc(gTicketData[id], ticketId);
+		
+	});
 	
 	$$('#idVer').html("App Version: " + versionx);
 	// HTML About: Report Problem
@@ -72,11 +126,15 @@ myApp.onPageInit('about', function (page) {
 	  var xname = $$("#formName").val();
 	  var problem = $$("#formText").val();
 	  //$$.get( ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model);
+	  var oldRegId = localStorage.getItem('registrationId');	  
+	  
 	  
 	  $$.ajax({
 		type: 'GET',
-		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model,
+		url: ip + "/api/postProblem?name=" + xname + "&problem=" + problem + "&os=" + device.platform + "&id=" + device.uuid + "&ver=" + versionx + "&manu=" + device.manufacturer + "&model=" + device.model + "&pushId=" + oldRegId,
 		success: function (data) {
+			ticketData = data;
+			console.log(data);
 			alert(messages.thanks);
 	  }});
 
@@ -84,8 +142,79 @@ myApp.onPageInit('about', function (page) {
 	});
 });
 
-
+function sibtestfunc(data, ticketId)
+{
+	console.log(data);
+	/*var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar-inner"><textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a>'
+	+'<div class="page-content messages-content">'
+	+'<div class="messages">'*/
+	
+	var newPageContent = '<div data-page="home" class="page navbar-fixed toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+  
+	for(var key_s in data['messages'])
+		if(data['messages'][key_s]['isClient'])
+			newPageContent += '<div class="message message-sent"><div class="message-text">'+ data["messages"][key_s]["msg"]+ '</div></div>';
+		else 
+			newPageContent += '<div class="message message-received"><div class="message-text">'+ data["messages"][key_s]["msg"]+ '</div></div>';
+		
  
+    newPageContent += '</div></div></div>';
+	//newPageContent +='<div class="toolbar messagebar" style=""></div>';
+	console.log(newPageContent);
+ //52.59.238.139
+//Load new content as new page
+	mainView.router.loadContent(newPageContent);
+	myMessages = myApp.messages('.messages', {
+	  autoLayout:true
+	});
+	      // Init Messagebar
+      var myMessagebar = myApp.messagebar('.messagebar');
+      
+      // Handle message
+      $$('.messagebar .link').on('click', function () {
+        // Message text
+        var messageText = myMessagebar.value().trim();
+        // Exit if empy message
+        if (messageText.length === 0) return;
+        
+        // Empty messagebar
+        myMessagebar.clear()
+        
+        // Random message type
+        //var messageType = (['sent', 'received'])[Math.round(Math.random())];
+        var messageType = 'sent'
+      
+        // Avatar and name for received message
+        var avatar, name;
+        if(messageType === 'received') {
+          avatar = 'person.png';
+          name = 'Cycrosoft';
+        }
+        // Add message
+        myMessages.addMessage({
+          // Message text
+          text: messageText,
+          // Random message type
+          type: messageType,
+          // Avatar and name:
+          avatar: avatar,
+          name: name,
+          // Day
+          day: !conversationStarted ? 'Today' : false,
+          time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
+        })
+        
+        // Update conversation flag
+        conversationStarted = true;
+      }); 
+	  
+	  $$.ajax({
+		type: 'GET',
+		url: ip + "/api/postAnswer?id=" + device.uuid + "&answer=" + messageText,
+		success: function (data) {
+			console.log(data);
+	  }});
+}
 
 function initialize()
 {	
@@ -142,6 +271,22 @@ function initialize()
     myApp.push.on('notification', function(data) {
 		console.log('notification event');
 		//alert(data.title + ": " + data.message);
+		if(data.title == "ticket")
+		{
+			myMessages.addMessage({
+			// Message text
+				text: data.message,
+				// Random message type
+				type: 'received',
+				// Avatar and name:
+				avatar: 'person.png',
+				name: 'Cycrosoft',
+				// Day
+				day: !conversationStarted ? 'Today' : false,
+				time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
+			})
+			conversationStarted = true;
+		}
 	});
 
 	myApp.push.finish(function() {
