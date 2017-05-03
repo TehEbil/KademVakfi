@@ -27,6 +27,12 @@ var gTicketData = {};
 var conversationStarted = false;
 var myMessages;
 
+
+
+
+var flagClearClicked = false;
+var eventNameForFocus = "focus";
+
 /*
 a	b	c	ç	d	e	f	g	ğ	h	ı	i	j	k	l	m	n	o	ö	p	r	s	ş	t	u	ü	v	y	z
 A	B	C	Ç	D	E	F	G	Ğ	H	I	İ	J	K	L	M	N	O	Ö	P	R	S	Ş	T	U	Ü	V	Y	Z
@@ -54,6 +60,38 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true,
 	domCache: true
 });
+
+//try to implement js fix for input/text area and mobile screen keyboard
+    //use class or element name
+$$(document).on("focus","input,textarea", function(e){
+	alert("n1");
+	var el = $$(e.target);
+	console.log(el);
+	//var page = el.closest(".page-content");
+	var page = el.closest(".page");
+	
+	console.log(page);
+	var elTop = el.offset().top;
+	//do correction if input at near or below middle of screen
+	if(elTop > page.height() / 2 - 20){
+		var delta = page.offset().top +  elTop - $$(".statusbar-overlay").height() * (myApp.device.ios?2:1) - $$(".navbar").height(); //minus navbar height?&quest;?
+		var kbdfix = page.find("#keyboard-fix");
+		if(kbdfix.length == 0) { //create kbdfix element
+			page.append("<div id='keyboard-fix'></div>");
+		}
+
+		kbdfix.css("height", delta*2 + "px");
+		page.scrollTop( delta, 300); 
+
+	}
+}, true);
+
+$$(document).on("blur","input,textarea", function(e){
+//call this code in the Back button handler - when it fired for keyboard hidding.
+	 //reduce all fixes
+	$$("#keyboard-fix").css("height", "0px");
+}, true);
+
 
 $$(document).on('deviceready', function() {
 	
@@ -142,6 +180,70 @@ myApp.onPageInit('about', function (page) {
 	});
 });
 
+
+       // eventNameForFocus = "touchstart focus";
+/*
+    if(Framework7.prototype.device.ios) {
+    }
+*/
+    //$$(document).on("focus","textarea", function(e){
+$$(document).on(eventNameForFocus,".kbdfix", function(e){
+	alert("n2");
+	console.log("WORKED");
+	flagClearClicked = false;
+	var el = $$(e.target);
+	var page = el.closest(".page-content");
+	var elTop = el.offset().top;
+	//do correction if input at near or below middle of screen
+	if(elTop > page.height() / 2 - 20 ){
+		var delta = page.offset().top +  elTop - $$(".statusbar-overlay").height() * (Framework7.prototype.device.ios?2:1) - $$(".navbar").height(); //minus navbar height?&quest;? 56 fot MD 
+		var kbdfix = page.find("#keyboard-fix");
+		if(kbdfix.length == 0) { //create kbdfix element
+			page.append("<div id='keyboard-fix'></div>");
+		}
+
+		$$("#keyboard-fix").css("height", delta * 2 + "px");
+		page.scrollTop( delta, 300);
+		//try to return caret to input field
+		//dirty hack ios flying caret
+		if(Framework7.prototype.device.ios) {
+			setTimeout(function () {
+
+				var temp = $$(el).val();
+				if(temp !=="") {
+					$$(el).val("");
+					$$(el).val(temp);
+				} else {
+					$$(el).val(" ");
+					$$(el).val("");
+				}
+				el.focus();
+				//el[0].select(); // apply focus or select to return caret to input field
+			}, 700); //set by experemtal on iPod
+		}
+
+		e.preventDefault();
+		e.stopImmediatePropagation();
+	}
+
+}, true);
+
+//$$(document).on("blur","input,textarea", function(e){
+//call this code in the Back button handler - when it fired for keyboard hidding.
+$$(document).on("blur",".kbdfix", function(e){
+	//console.log("blur");
+	//reduce all fixes
+	if(!flagClearClicked) {
+		setTimeout(function() {
+			$$("#keyboard-fix").css("height", "0px");
+			flagClearClicked = false;
+		},400);
+
+	}
+
+}, true);
+
+
 function sibtestfunc(ticketId)
 {
 	var data = gTicketData[ticketId]
@@ -150,7 +252,7 @@ function sibtestfunc(ticketId)
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar messagebar-init" data-max-height="200"> <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div></div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])
@@ -178,8 +280,11 @@ function sibtestfunc(ticketId)
 	  
 		
 	  $$('#idMessageText').on('click', function() {
+		  setTimeout(function() {
+			  
 		$$('#idMessageText').scrollTop($$('#idMessageText').offset().top, 500);
 		$$('body').scrollTop($$('#idMessageText').offset().top, 500);
+		}, 1000);
 	  });
       $$('.messagebar .link').on('click', function () {
         // Message text
