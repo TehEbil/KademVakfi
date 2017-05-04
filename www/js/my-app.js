@@ -141,6 +141,8 @@ myApp.onPageInit('about', function (page) {
 $$(document).on('deviceready', function() {
 	
 	$$.ajaxSetup({'timeout': 3000});
+	Keyboard.shrinkView(true);
+	Keyboard.hideFormAccessoryBar(true);
 	initialize();
 });
 
@@ -157,7 +159,7 @@ $$('body').click(function() {
     if(Framework7.prototype.device.ios) {
     }
 */
-$$(document).on("focus","textarea, input", function(e){
+$$(document).on("focus",".kbdfix", function(e){
 //$$(document).on(eventNameForFocus,".kbdfix", function(e){
 	console.log("WORKED");
 	flagClearClicked = false;
@@ -202,7 +204,7 @@ $$(document).on("focus","textarea, input", function(e){
 
 }, true);
 
-$$(document).on("blur","input,textarea", function(e){
+$$(document).on("blur",".kbdfix", function(e){
 //call this code in the Back button handler - when it fired for keyboard hidding.
 //$$(document).on("blur",".kbdfix", function(e){
 	//console.log("blur");
