@@ -157,13 +157,16 @@ $$('body').click(function() {
     if(Framework7.prototype.device.ios) {
     }
 */
-    //$$(document).on("focus","textarea", function(e){
-$$(document).on(eventNameForFocus,".kbdfix", function(e){
-	alert("n2");
+$$(document).on("focus","textarea, input", function(e){
+//$$(document).on(eventNameForFocus,".kbdfix", function(e){
 	console.log("WORKED");
 	flagClearClicked = false;
 	var el = $$(e.target);
 	var page = el.closest(".page-content");
+	if(page.length == 0)
+		page = $$(".messages-content");
+	console.log(page);
+
 	var elTop = el.offset().top;
 	//do correction if input at near or below middle of screen
 	if(elTop > page.height() / 2 - 20 ){
@@ -199,9 +202,9 @@ $$(document).on(eventNameForFocus,".kbdfix", function(e){
 
 }, true);
 
-//$$(document).on("blur","input,textarea", function(e){
+$$(document).on("blur","input,textarea", function(e){
 //call this code in the Back button handler - when it fired for keyboard hidding.
-$$(document).on("blur",".kbdfix", function(e){
+//$$(document).on("blur",".kbdfix", function(e){
 	//console.log("blur");
 	//reduce all fixes
 	if(!flagClearClicked) {
@@ -223,7 +226,7 @@ function sibtestfunc(ticketId)
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
 	
-	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar" style="">  <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div></div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
+	var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar messagebar" style="height: 44px;">  <div class="toolbar-inner"> <textarea id="idMessageText" placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div></div> <div class="page-content messages-content" style="padding-bottom: 44px !important;"> <div class="messages messages-auto-layout">'
   //var newPageContent = '<div data-page="home" class="page toolbar-fixed"> <div class="navbar"> <div class="navbar-inner"> <div class="left"> </div> <div class="center" style="left: 0px;">Messages</div> <div class="right"> </div> </div> </div> <div class="toolbar messagebar" style=""> <div class="toolbar-inner"> <textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a> </div> </div> <div class="page-content messages-content"> <div class="messages messages-auto-layout">'
   
 	for(var key_s in data['messages'])

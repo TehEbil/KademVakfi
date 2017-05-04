@@ -36,6 +36,9 @@
         "phonegap-plugin-push": {
             "SENDER_ID": "492870102848",
             "PACKAGE_NAME": "com.cycrosoft.kademvakfi"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.cycrosoft.kademvakfi"
         }
     },
     "dependent_plugins": {}

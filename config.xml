@@ -11,6 +11,7 @@
     <icon src="icon.png" />
     <content src="index.html" />
     <access origin="*" subdomains="true" />
+    <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <platform name="ios">
