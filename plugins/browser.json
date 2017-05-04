@@ -31,6 +31,9 @@
         },
         "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "com.cycrosoft.kademvakfi"
+        },
+        "cordova-plugin-keyboard": {
+            "PACKAGE_NAME": "com.cycrosoft.kademvakfi"
         }
     },
     "dependent_plugins": {}

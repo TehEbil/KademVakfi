@@ -76,4 +76,5 @@
     </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.5" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="~2.3.0" />
+    <plugin name="cordova-plugin-keyboard" spec="~1.1.5" />
 </widget>

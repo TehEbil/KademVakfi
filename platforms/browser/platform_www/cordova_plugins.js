@@ -68,6 +68,14 @@ module.exports = [
         "id": "cordova-plugin-device.DeviceProxy",
         "pluginId": "cordova-plugin-device",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
+        "id": "cordova-plugin-keyboard.keyboard",
+        "pluginId": "cordova-plugin-keyboard",
+        "clobbers": [
+            "window.Keyboard"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -80,7 +88,8 @@ module.exports.metadata =
     "cordova-plugin-app-version": "0.1.9",
     "phonegap-plugin-push": "1.10.0",
     "cordova-plugin-device": "1.1.5",
-    "cordova-plugin-crosswalk-webview": "2.3.0"
+    "cordova-plugin-crosswalk-webview": "2.3.0",
+    "cordova-plugin-keyboard": "1.1.5"
 }
 // BOTTOM OF METADATA
 });
