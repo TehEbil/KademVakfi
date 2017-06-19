@@ -48,11 +48,12 @@ var messages = {
 };
 
 var categories = {
-	"sahsiyet": "Şahsiyet",
+	"sahsiyet": "Şahsiyet Düşünce Ve İfade Üzerine",
+	"dünya": "Dünya Fikir Sanat Ve Edebiyat Tarihi"
+	/*
 	"edebiyat": "Edebiyat",
-	"dünya": "Dünya Fikir",
 	"düsünce": "Düşünce ve İfade",
-	"yaratilis": "Yaratılış ve Kişilik"
+	"yaratilis": "Yaratılış ve Kişilik"*/
 };
 
 var $$ = Dom7;
@@ -153,7 +154,7 @@ $$('body').click(function() {
 });
 */
 
-
+7
        // eventNameForFocus = "touchstart focus";
 /*
     if(Framework7.prototype.device.ios) {
@@ -520,27 +521,36 @@ $$('.tool').on('click', function(event) {
 	found.click();			// NEC???
 });
 
-function getVideos(pVideoTitle, init=false)
+function getVideos(pVideoTitle, pCategory, init=false)
 {
 	var markup_o = "";	
-	var size = data_o[pVideoTitle].length;
 	
-	for(var key_s in data_o[pVideoTitle])
+	console.log(data_o)
+	console.log(data_o[pVideoTitle]);
+	console.log(data_o[pVideoTitle][pCategory]);
+	
+	data_o2 = data_o[pVideoTitle][pCategory]
+	var size = data_o2.length;
+
+	
+	for(var key_s in data_o2)
 	{
-		var dat = data_o[pVideoTitle][key_s];
+		console.log(data_o2)
+		var dat = data_o2[key_s];
+		console.log(dat);
 		var vidId = dat.videoId;
-		
+				console.log("test2");
 		if(firstVid == "")
 			firstVid = vidId;
-		
+				console.log("test2");
 		var url = dat.img;
-		
+				console.log("test2");
 		var date = dat.date;
 		var videoTitle = "UNDEFINED";
 		if(dat.title != "")
 			videoTitle = dat.title;
-		
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
+		console.log("test2");
 	}
 	if(!init)
 	{
@@ -551,7 +561,9 @@ function getVideos(pVideoTitle, init=false)
 	return;
 }
 
-function ChangeVideoSite(pVideoTitle) {
+function ChangeVideoSite(pVideoTitle, pCategory) {
+	console.log(pVideoTitle)
+	console.log(pCategory)
 	//console.log($$(event.target).attr('style','#test1'));
 	if(oldElement != null)
 		oldElement.removeClass("classASelected");
@@ -575,7 +587,7 @@ function ChangeVideoSite(pVideoTitle) {
 	//console.log($$(event.target).addClass("test1"));
 	
 	
-	getVideos(pVideoTitle);
+	getVideos(pVideoTitle, pCategory);
 }
 
 function getVideoData()
@@ -589,18 +601,23 @@ function getVideoData()
 		timeout: 10000,
 		success: function (data) {
 			data_o = data;
+			//console.log(data);
 			for(var key_s in data)
-				if(key_s == "sahsiyet")
-					markup_o += '<div id="sahsiyetId" class="close-panel classA classASelected" onclick="ChangeVideoSite(\''+ key_s + '\')"><p><a id="onUrlClickSahsiyet" class="close-panel classATextSelected">' + categories[key_s] + '</a></p></div>';
-				else
-					markup_o += '<div class="close-panel classA" onclick="ChangeVideoSite(\''+ key_s + '\')"><p><a id="onUrlClick" class="close-panel">' + categories[key_s] + '</a></p></div>';
+			{
+				markup_o += '<div class="clHeader">' + categories[key_s] + '</div>';
+				for(var key2_s in data[key_s])
+					if(key_s == "sahsiyet" && key2_s == "2016-2017")
+						markup_o += '<div id="sahsiyetId" class="close-panel classA classASelected" onclick="ChangeVideoSite(\''+ key_s + '\',\'' + key2_s + '\')"><p><a id="onUrlClickSahsiyet" class="close-panel classATextSelected">' + key2_s + '</a></p></div>';
+					else
+						markup_o += '<div class="close-panel classA" onclick="ChangeVideoSite(\''+ key_s + '\',\'' + key2_s + '\')"><p><a id="onUrlClick" class="close-panel">' + key2_s + '</a></p></div>';
 				//markup_o += '<div class="classA"><p><a id="onUrlClick" class="close-panel" onclick="ChangeVideoSite(\''+ key_s + '\');">' + categories[key_s] + '</a></p></div>';
 				//markup_o += '<p><a id="onUrlClick" class="close-panel" onclick="ChangeVideoSite(\''+ key_s + '\');">' + categories[key_s] + '</a></p>';
-
+			}
+			
 			$$("#idSidebar").html(markup_o);
 			oldElement = $$('#sahsiyetId');
 			oldTextElement = $$('#onUrlClickSahsiyet');
-			getVideos("sahsiyet", true);
+			getVideos("sahsiyet", "2016-2017", true);
 			//ChangeVideoSite("sahsiyet", true);
 		}});
 
@@ -625,7 +642,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerError(event) {
-	alert(event);
+	//alert(event);
 	alert("FEHLER: onPlayerError");
 }
 
@@ -708,8 +725,8 @@ function SetupPlayer()
 }
 
 function onPlayerReady(event) {
-	console.log(event);
-  //alert("Ready")
+	/*console.log(event);
+	console.log("readyevent")*/
   playerIsSetup = true;
   ChangeVideo(firstVid, true);
   firstVid = "";
