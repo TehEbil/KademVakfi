@@ -10,14 +10,16 @@ var myApp = new Framework7({
     }
 });
 
-var ip = "http://52.59.238.139:3001";
+var oldIp = "http://52.59.238.139:3001";
+var ip = "http://35.158.214.37:3001";
+
 
 var counter = 0;
 var firstVid = "";
 var player = null;
 var data_o;
 var isFullScreenState = false;
-var versionx = "1.0.0";
+var versionx = "1.0.2";
 var playerIsSetup = false;
 var gState = 0;
 var oldElement = null;
@@ -224,7 +226,7 @@ $$(document).on("blur",".kbdfix", function(e){
 function sibtestfunc(ticketId)
 {
 	var data = gTicketData[ticketId]
-	console.log(data);
+	//console.log(data);
 	/*var newPageContent = '<div class="page toolbar-fixed"><div class="toolbar-inner"><textarea placeholder="Message" class=""></textarea><a href="#" class="link">Send</a>'
 	+'<div class="page-content messages-content">'
 	+'<div class="messages">'*/
@@ -241,7 +243,7 @@ function sibtestfunc(ticketId)
  
     newPageContent += '</div></div></div>';
 	//newPageContent +='<div class="toolbar messagebar" style=""></div>';
-	console.log(newPageContent);
+	//console.log(newPageContent);
  //52.59.238.139
 //Load new content as new page
 	mainView.router.loadContent(newPageContent);
@@ -295,9 +297,9 @@ function sibtestfunc(ticketId)
           day: !conversationStarted ? 'Today' : false,
           time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
         })
-		console.log(gTicketData[ticketId])
+		//console.log(gTicketData[ticketId])
         gTicketData[ticketId]['messages'].push({isClient: true, msg: messageText})
-		console.log(gTicketData[ticketId])
+		//console.log(gTicketData[ticketId])
 		  $$.ajax({
 			type: 'GET',
 			url: ip + "/api/postAnswer?id=" + device.uuid + "&answer=" + messageText + "&ticketId=" + ticketId,
@@ -498,9 +500,9 @@ function Titles()
 
 $$('.toola').click(function(event) {
 	// this.append wouldn't work
-	console.log(event);
+	/* console.log(event);
 	console.log(this.childNodes[1].click());
-	console.log($$(this).children());
+	console.log($$(this).children()); */
 	//$$(this).children('a')[0].click();
 });
 
@@ -525,9 +527,9 @@ function getVideos(pVideoTitle, pCategory, init=false)
 {
 	var markup_o = "";	
 	
-	console.log(data_o)
+	/*console.log(data_o)
 	console.log(data_o[pVideoTitle]);
-	console.log(data_o[pVideoTitle][pCategory]);
+	console.log(data_o[pVideoTitle][pCategory]);*/
 	
 	data_o2 = data_o[pVideoTitle][pCategory]
 	var size = data_o2.length;
@@ -535,22 +537,22 @@ function getVideos(pVideoTitle, pCategory, init=false)
 	
 	for(var key_s in data_o2)
 	{
-		console.log(data_o2)
+		//console.log(data_o2)
 		var dat = data_o2[key_s];
-		console.log(dat);
+		//console.log(dat);
 		var vidId = dat.videoId;
-				console.log("test2");
+				//console.log("test2");
 		if(firstVid == "")
 			firstVid = vidId;
-				console.log("test2");
+				//console.log("test2");
 		var url = dat.img;
-				console.log("test2");
+				//console.log("test2");
 		var date = dat.date;
 		var videoTitle = "UNDEFINED";
 		if(dat.title != "")
 			videoTitle = dat.title;
 		markup_o += '<div class="clVideos" ><a id="onChangeVideoClick" onclick="ChangeVideo(\''+ vidId + '\');"><img border="0" class="lazy lazy-fadein" alt="111" src="' + url + '" width="100%" ></a><div class="clVideoX"><div id="idVideoText" class="clCounter">' + size-- + '</div><p class="clTitle">' + videoTitle + '</p><p id="idVideoDate" class="clDate">' + date + '</p></div></div>\n';
-		console.log("test2");
+		//console.log("test2");
 	}
 	if(!init)
 	{
@@ -627,8 +629,8 @@ function getVideoData()
 function onYouTubeIframeAPIReady() {
 /*	if(counter <= 12 && (firstVid == null || firstVid == ""))
 	{
-		setTimeout(onYouTubeIframeAPIReady, 250);
 		counter++;
+		setTimeout(onYouTubeIframeAPIReady, 250);
 		return;
 	}
 	if(counter >= 12)

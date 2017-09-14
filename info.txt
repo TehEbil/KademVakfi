@@ -5,13 +5,13 @@ Cordova version: 6.5.0
 Config.xml file: 
 
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cycrosoft.kademvakfi" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>KademVakfi</name>
+<widget id="com.***.***" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>***</name>
     <description>
-        KademVakfi
+        ***
     </description>
-    <author email="can.friedhoff@gmail.com" href="http://google.de">
-        Cycrosoft
+    <author email="***" href="http://google.de">
+        ***
     </author>
     <icon height="180" platform="ios" src="icon-60@3x.png" width="180" />
     <icon src="icon.png" />
@@ -21,28 +21,6 @@ Config.xml file:
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <platform name="ios">
-        <icon height="29" src="res/icons/ios/icon-small.png" width="29" />
-        <icon height="58" src="res/icons/ios/icon-small-2x.png" width="58" />
-        <icon height="40" src="res/icons/ios/icon-40.png" width="40" />
-        <icon height="80" src="res/icons/ios/icon-40-2x.png" width="80" />
-        <icon height="50" src="res/icons/ios/icon-50.png" width="50" />
-        <icon height="100" src="res/icons/ios/icon-50-2x.png" width="100" />
-        <icon height="57" src="res/icons/ios/icon.png" width="57" />
-        <icon height="114" src="res/icons/ios/icon-2x.png" width="114" />
-        <icon height="60" src="res/icons/ios/icon-60.png" width="60" />
-        <icon height="120" src="res/icons/ios/icon-60-2x.png" width="120" />
-        <icon height="180" src="res/icons/ios/icon-60-3x.png" width="180" />
-        <icon height="72" src="res/icons/ios/icon-72.png" width="72" />
-        <icon height="144" src="res/icons/ios/icon-72-2x.png" width="144" />
-        <icon height="76" src="res/icons/ios/icon-76.png" width="76" />
-        <icon height="152" src="res/icons/ios/icon-76-2x.png" width="152" />
-        <splash height="480" src="res/screens/ios/screen-iphone-portrait.png" width="320" />
-        <splash height="960" src="res/screens/ios/screen-iphone-portrait-2x.png" width="640" />
-        <splash height="1136" src="res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" />
-        <splash height="1334" src="res/screens/ios/screen-iphone-portrait-667h.png" width="750" />
-        <splash height="2208" src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" />
-        <splash height="1024" src="res/screens/ios/screen-ipad-portrait.png" width="768" />
-        <splash height="2048" src="res/screens/ios/screen-ipad-portrait-2x.png" width="1536" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="BackupWebStorage" value="none" />
@@ -50,26 +28,8 @@ Config.xml file:
     <platform name="android">
         <preference name="android-minSdkVersion" value="16" />
         <allow-intent href="market:*" />
-        <icon qualifier="ldpi" src="res/icons/android/icon-36-ldpi.png" />
-        <icon qualifier="mdpi" src="res/icons/android/icon-48-mdpi.png" />
-        <icon qualifier="hdpi" src="res/icons/android/icon-72-hdpi.png" />
-        <icon qualifier="xhdpi" src="res/icons/android/icon-96-xhdpi.png" />
-        <icon qualifier="xxhdpi" src="res/icons/android/icon-144-xxhdpi.png" />
-        <icon qualifier="xxxhdpi" src="res/icons/android/icon-192-xxxhdpi.png" />
-        <splash qualifier="ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
-        <splash qualifier="mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
-        <splash qualifier="hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
-        <splash qualifier="xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
     </platform>
-    <platform name="wp8">
-        <icon height="99" src="res/icons/wp8/ApplicationIcon.png" width="99" />
-        <icon height="159" src="res/icons/wp8/Background.png" width="159" />
-    </platform>
-    <platform name="windows">
-        <icon height="150" src="res/icons/windows8/logo.png" width="150" />
-        <icon height="30" src="res/icons/windows8/smalllogo.png" width="30" />
-        <icon height="50" src="res/icons/windows8/storelogo.png" width="50" />
-    </platform>
+
     <preference name="xwalkMultipleApk" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
@@ -78,7 +38,7 @@ Config.xml file:
     <plugin name="cordova-plugin-network-information" spec="~1.3.2" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="phonegap-plugin-push" spec="~1.10.0">
-        <variable name="SENDER_ID" value="492870102848" />
+        <variable name="SENDER_ID" value="***" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.5" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="~2.3.0" />
@@ -94,8 +54,7 @@ Error retrieving Android platform information:
 Android SDK is not set up properly. Make sure that the Android SDK 'tools' and 'platform-tools' directories are in the PATH variable. 
 
 Error: cmd: Command failed with exit code 1 Error output:
-Der Befehl "android" ist entweder falsch geschrieben oder
-konnte nicht gefunden werden.
+Command android has not been found.
 
 
 
