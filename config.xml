@@ -65,11 +65,11 @@
         <icon height="30" src="res/icons/windows8/smalllogo.png" width="30" />
         <icon height="50" src="res/icons/windows8/storelogo.png" width="50" />
     </platform>
-    <preference name="xwalkMultipleApk" value="false" />
+    <!--preference name="xwalkMultipleApk" value="false" /-->
     <preference name="DisallowOverscroll" value="true" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-console" spec="~1.1.0" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" />
+    <!--plugin name="cordova-plugin-crosswalk-webview" spec="2.4.0" /-->
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="cordova-plugin-keyboard" spec="~1.2.0" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
