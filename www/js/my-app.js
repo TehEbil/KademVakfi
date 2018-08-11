@@ -20,7 +20,7 @@ var firstVid = "";
 var player = null;
 var data_o;
 var isFullScreenState = false;
-var versionx = "1.0.3";
+var versionx = "1.0.4";
 var playerIsSetup = false;
 var gState = 0;
 var oldElement = null;
