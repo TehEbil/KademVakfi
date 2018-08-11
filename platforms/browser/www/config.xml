@@ -17,6 +17,7 @@
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
+    <preference name="phonegap-version" value="cli-6.4.0" />
     <preference name="xwalkMultipleApk" value="false" />
     <preference name="DisallowOverscroll" value="true" />
 </widget>

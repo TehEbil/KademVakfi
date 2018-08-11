@@ -20,7 +20,7 @@ var firstVid = "";
 var player = null;
 var data_o;
 var isFullScreenState = false;
-var versionx = "1.0.2";
+var versionx = "1.0.3";
 var playerIsSetup = false;
 var gState = 0;
 var oldElement = null;
@@ -418,12 +418,29 @@ function SetupJSAPI()
 				console.log(version, data)
 				console.log(version, data)
 				console.log(version, data)
-				if(version < data) {
+
+				if(cmpVersions(version, data) < 0) {
 					alert(messages.newVer);
 				}
 			}});
 	});
 	gState = 1;
+}
+
+function cmpVersions (a, b) {
+    var i, diff;
+    var regExStrip0 = /(\.0+)+$/;
+    var segmentsA = a.replace(regExStrip0, '').split('.');
+    var segmentsB = b.replace(regExStrip0, '').split('.');
+    var l = Math.min(segmentsA.length, segmentsB.length);
+
+    for (i = 0; i < l; i++) {
+        diff = parseInt(segmentsA[i], 10) - parseInt(segmentsB[i], 10);
+        if (diff) {
+            return diff;
+        }
+    }
+    return segmentsA.length - segmentsB.length;
 }
 
 function delayedIntialize()
