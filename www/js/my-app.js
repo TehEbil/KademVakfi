@@ -10,8 +10,9 @@ var myApp = new Framework7({
     }
 });
 
-var oldIp = "http://52.59.238.139:3001";
-var ip = "http://35.158.214.37:3001";
+var oldOldIp = "http://52.59.238.139:3001";
+var oldIp = "http://35.158.214.37:3001";
+var ip = "http://54.93.95.92:3001";
 
 
 var counter = 0;
@@ -327,7 +328,7 @@ function initialize()
 		document.addEventListener("online", delayedIntialize, true);
 	}
 	else
-	{	
+	{
 		SetupJSAPI();
 		getVideoData();
 	}
@@ -401,6 +402,9 @@ function SetupJSAPI()
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	
 	cordova.getAppVersion.getVersionNumber().then(function (version) {
+		console.log("version:", version)
+		console.log("version:", version)
+		console.log("version:", version)
 		versionx = version;
 		
 		
@@ -411,6 +415,9 @@ function SetupJSAPI()
 			type: 'GET',
 			url: ip + "/api/version/",
 			success: function (data) {
+				console.log(version, data)
+				console.log(version, data)
+				console.log(version, data)
 				if(version < data) {
 					alert(messages.newVer);
 				}
@@ -531,6 +538,7 @@ function getVideos(pVideoTitle, pCategory, init=false)
 	console.log(data_o[pVideoTitle]);
 	console.log(data_o[pVideoTitle][pCategory]);*/
 	
+	console.log(data_o);
 	data_o2 = data_o[pVideoTitle][pCategory]
 	var size = data_o2.length;
 
